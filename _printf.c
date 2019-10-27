@@ -48,14 +48,14 @@ int _printf(const char *format, ...)
 		j_spec = 0;
 		if (format[i] == '%')
 		{
-			/* Check whether exists a conversion specifier or not */
-			/* And check_format function */
+			/* Check whether exists a conversion specifier or not and if format is right */
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
 			{
 				/* Generate_malloc function */
 				str = generate_malloc(format + i, j_spec, list), lenstr = _strlen(str);
 				/* Copies the str to the buffer */
 				_memcpy(buffer + i_buffer, str, lenstr);
+				free(str);
 			}
 			else
 			{
