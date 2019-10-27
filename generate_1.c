@@ -60,7 +60,7 @@ char *gen_s(const char *pattern, int len_p, va_list list)
 	while (s[l])
 		l++;
 
-	str = malloc(l);
+	str = malloc(l + 1);
 	if (str == 0)
 		return (0);
 

@@ -47,6 +47,7 @@ char *gen_X(const char *, int, va_list);
 char *gen_p(const char *, int, va_list);
 char *gen_u(const char *, int, va_list);
 char *gen_S(const char *, int, va_list);
+char *gen_r(const char *, int, va_list);
 int check_specs(const char *s, int *p);
 void _memcpy(char *dest,  const char *src, unsigned int n);
 void print_number_str(int n, char *str);

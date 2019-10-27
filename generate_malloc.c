@@ -25,6 +25,7 @@ char *generate_malloc(const char *s, int len_p, va_list list)
 		{'p', gen_p},
 		{'u', gen_u},
 		{'S', gen_S},
+		{'r', gen_r},
 	};
 	/* 13 Specifiers */
 	for (i = 0; i < 13; i++)
