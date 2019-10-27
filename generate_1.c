@@ -16,13 +16,13 @@
 char *gen_i(const char *pattern, int len_p, va_list list)
 {
 	int len_int;
-	int number;
+	unsigned long int number, base = 10;
 	char *str;
 
 	(void) pattern;
 	(void) len_p;
 	number = va_arg(list, int);
-	len_int = blen(number, 10);
+	len_int = blen(number, base);
 	str = malloc(len_int + 1);
 	if (str == NULL)
 		return (0);
@@ -48,12 +48,12 @@ char *gen_i(const char *pattern, int len_p, va_list list)
  */
 char *gen_o(const char *pattern, int len_p, va_list list)
 {
-	int i = 0, base = 8, n;
+	unsigned long int i = 0, base = 8, n;
 	char *str;
 
 	(void) pattern;
         (void) len_p;
-	n = va_arg(list, int);
+	n = va_arg(list, unsigned int);
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else
@@ -87,12 +87,12 @@ char *gen_o(const char *pattern, int len_p, va_list list)
  */
 char *gen_b(const char *pattern, int len_p, va_list list)
 {
-	int i = 0, base = 2, n;
+	unsigned long int i = 0, base = 2, n;
 	char *str;
 
 	(void) pattern;
         (void) len_p;
-	n = va_arg(list, int);
+	n = va_arg(list, unsigned int);
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else

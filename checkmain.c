@@ -3,6 +3,6 @@
 int main(void)
 {
 
-	_printf("%d\n", 2);
+	_printf("d: %d o: %o b: %b\n", 54);
 	return (0);
 }
