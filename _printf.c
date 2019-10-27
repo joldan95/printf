@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 				lenstr = _strlen(str);
 				j_spec = lenstr;
 				/* Copies the str to the buffer */
-				_memcpy(buffer + i _buffer, str, lenstr);
+				_memcpy(buffer + i_buffer, str, lenstr);
 			}
 			else
 			{

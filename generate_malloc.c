@@ -8,25 +8,14 @@
  *
  * Return: 1 if correct, 0 if incorrect
  */
-char *generate_malloc(char *s, int len_p, va_list list)
+char *generate_malloc(const char *s, int len_p, va_list list)
 {
 	int i;
-	char *(*f)(char *, int, va_list);
+	char *(*f)(const char *, int, va_list);
 	char *fx = 0;
 	specs_t tspecs[] = {
-		{'c', gen_c},
-		{'s', gen_s},
-		{'S', gen_S},
 		{'d', gen_i},
 		{'i', gen_i},
-		{'o', gen_o},
-		{'x', gen_x},
-		{'X', gen_X},
-		{'b', gen_b},
-		{'u', gen_u},
-		{'p', gen_p},
-		{'r', gen_r},
-		{'R', gen_R},
 	};
 	/* 13 Specifiers */
 	for (i = 0; i < 13; i++)
