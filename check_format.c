@@ -40,18 +40,13 @@ int whichflag(char formspec)
  */
 int check_format(char *formspec, int j)
 {
-	int h, k, z, check, flagtmp1, flagtmp2, zeropass = 0;
+	int h, k, z, check, flagtmp1, flagtmp2, zeropass = 0, starpass = 1;
 	checkstr flagcheck[] = {
-		{'c', " 0+#lh."},
-		{'s', " 0+#lh"}, {'S', " 0+#lh"},
-		{'d', "#"}, {'i', "#"},
-		{'u', " +#"},
-		{'b', " +#lh"},
-		{'o', " +"}, {'x', " +"}, {'X', " +"},
-		{'p', " 0+#lh."},
-		{'r', " 0+#lh"}, {'R', " 0+#lh"}
+		{'c', " 0+#lh."}, {'s', " 0+#lh"}, {'S', " 0+#lh"},
+		{'d', "#"}, {'i', "#"}, {'u', " +#"},
+		{'b', " +#lh"}, {'o', " +"}, {'x', " +"}, {'X', " +"},
+		{'p', " 0+#lh."}, {'r', " 0+#lh"}, {'R', " 0+#lh"}
 	};
-
 	/* Check Specifier and if flag cannot go with it*/
 	for (h = 0; h < 13; h++)
 		if (formspec[j - 1] == flagcheck[h].flag)
@@ -62,11 +57,18 @@ int check_format(char *formspec, int j)
 		{
 			if (whichflag(formspec[k]) == 2 || whichflag(formspec[k]) == 3)
 				zeropass = 1;
+			if ((whichflag(formspec[k]) == 2 || formspec[k] == '0') && starpass == 0)
+				return (0);
 			if (formspec[k] == flagcheck[h].flagnot[z] && zeropass == 0)
 				return (0);
+			if (whichflag(formspec[k]) == 2)
+				starpass = 0;
+			if (formspec[k] == '0' && whichflag(formspec[k - 1]) == 3)
+				starpass = 0;
+			if (whichflag(formspec[k]) == 3)
+				starpass = 1;
 		}
 	}
-	/* Check if order is right */
 	for (h = 0; h < j - 2; h++)
 	{
 		flagtmp1 = whichflag(formspec[h]), flagtmp2 = whichflag(formspec[h + 1]);
