@@ -28,15 +28,31 @@ void rev_str(char *s)
  * @n: number
  * @base: base of number
  *
- * Return: length of number (+1 if negative)
+ * Return: length of number
  */
 int blen(unsigned long int n, unsigned long int base)
 {
 	unsigned long int i, neg = 0;
 
-	if (n < 0)
-		n *= -1, neg = 1;
 	for (i = 0; n > 0; i++)
 		n = n / base;
 	return (i + neg);
+}
+/**
+ * blen10 - obtains length of number in base
+ *
+ * @n: number
+ * @base: base of number
+ *
+ * Return: length of number (+1 if negative)
+ */
+int blen10(long int n, long int base)
+{
+        long int i, neg = 0;
+
+        if (n < 0)
+                n *= -1, neg = 1;
+        for (i = 0; n > 0; i++)
+                n = n / base;
+        return (i + neg);
 }
