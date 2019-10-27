@@ -42,14 +42,12 @@ int _printf(const char *format, ...)
 	buffer = malloc(1024);
 	if (buffer == NULL)
 		return (0);
+	va_start(list, format);
 	while (format && format[i])
 	{
 		j_spec = 0;
 		if (format[i] == '%')
 		{
-			/* Copies '%' to the buffer */
-			if (format[i + 1] == '%')
-				_memcpy(buffer + i_buffer, format + i, 1);
 			/* Check whether exists a conversion specifier or not */
 			/* And check_format function */
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
@@ -57,23 +55,34 @@ int _printf(const char *format, ...)
 				/* Generate_malloc function */
 				str = generate_malloc(format + i, j_spec, list);
 				lenstr = _strlen(str);
-				j_spec = lenstr;
 				/* Copies the str to the buffer */
 				_memcpy(buffer + i_buffer, str, lenstr);
 			}
 			else
 			{
-				/* Copies the string from format[i] to format[i + j_spec */
-				_memcpy(buffer + i_buffer, format + i, j_spec);
+				/* Copies '%' to the buffer */
+				if (format[i + 1] == '%')
+				{
+					_memcpy(buffer + i_buffer, format + i, 1);
+					j_spec = 2;
+					lenstr = 1;
+				}
+				else
+				{
+					/* Copies the string from format[i] to format[i + j_spec */
+					_memcpy(buffer + i_buffer, format + i, j_spec);
+					lenstr = j_spec;
+				}
 			}
 			i += j_spec;
-			i_buffer += j_spec;
+			i_buffer += lenstr;
 			continue;
 		}
 		_memcpy(buffer + i_buffer, format + i, 1);
 		i++;
 		i_buffer++;
 	}
+	va_end(list);
 	i_buffer = write(1, buffer, i_buffer);
 	free(buffer);
 	return (i_buffer);
@@ -91,7 +100,7 @@ int check_specs(const char *s, int *p)
 	char *specs = "csSdioxXburRp";
 	int i = 0, j;
 
-	while (s[i] && s[i] != '%')
+	while (s[i] && (i == 0 || s[i] != '%'))
 	{
 		j = 0;
 		while (specs[j])
