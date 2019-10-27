@@ -14,7 +14,7 @@ char *hexS(int n)
 	if (n > 255)
 		return (0);
 
-	r = malloc (3);
+	r = malloc(3);
 	if (r == 0)
 		return (0);
 
@@ -23,7 +23,7 @@ char *hexS(int n)
 
 	if (n < 16)
 		r[1] = '0';
-	for(; n > 0; i++)
+	for (; n > 0; i++)
 	{
 		if ((n % 16) < 10)
 			r[i] = (n % 16) + '0';
