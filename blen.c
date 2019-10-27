@@ -10,9 +10,10 @@
 int blen(int n, int base)
 {
 	int i, neg = 0;
+
 	if (n < 0)
 		n *= -1, neg = 1;
-	for(i = 0; n > 0; i++)
+	for (i = 0; n > 0; i++)
 		n = n / base;
 	return (i + neg);
 }
