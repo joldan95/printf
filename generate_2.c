@@ -1,0 +1,86 @@
+#include "holberton.h"
+
+/**
+ * gen_x - Generates an hexadecimal conversion written to a string in lowercase
+ * @pattern: Pattern to follow to print the hexadecimal
+ * @len_p: Length of the pattern
+ * @list: list of arguments of the pattern
+ *
+ * Generates a hexadecimal written to a string, following
+ * the pattern inserted by parameter.
+ * The pattern was already checked.
+ * The next argument in list corresponds to the argument to print
+ *
+ * Return: A pointer to the string
+ * NULL if could not allocate the memory for the operation
+ */
+char *gen_x(const char *pattern, int len_p, va_list list)
+{
+	unsigned long int i = 0, base = 16, n;
+	char *str;
+
+	(void) pattern;
+	(void) len_p;
+
+	n = va_arg(list, unsigned int);
+	if (n != 0)
+		str = malloc(blen(n, base) + 1);
+	else
+		str = malloc(1 + 1), str[i] = '0', i++;
+	if (str == 0)
+		return (0);
+
+	for (; n > 0; i++)
+	{
+		if ((n % base) < 10)
+			str[i] = (n % base) + '0';
+		else
+			str[i] = (n % base) + 'W';
+		n = n / base;
+	}
+	str[i] = '\0';
+	rev_str(str);
+	return (str);
+}
+/**
+ * gen_X - Generates an hexadecimal conversion written to a string in Uppercase
+ * @pattern: Pattern to follow to print the hexadecimal
+ * @len_p: Length of the pattern
+ * @list: list of arguments of the pattern
+ *
+ * Generates a hexadecimal written to a string, following
+ * the pattern inserted by parameter.
+ * The pattern was already checked.
+ * The next argument in list corresponds to the argument to print
+ *
+ * Return: A pointer to the string
+ * NULL if could not allocate the memory for the operation
+ */
+char *gen_X(const char *pattern, int len_p, va_list list)
+{
+	unsigned long int i = 0, base = 16, n;
+	char *str;
+
+	(void) pattern;
+	(void) len_p;
+
+	n = va_arg(list, unsigned int);
+	if (n != 0)
+		str = malloc(blen(n, base) + 1);
+	else
+		str = malloc(1 + 1), str[i] = '0', i++;
+	if (str == 0)
+		return (0);
+
+	for (; n > 0; i++)
+	{
+		if ((n % base) < 10)
+			str[i] = (n % base) + '0';
+		else
+			str[i] = (n % base) + '7';
+		n = n / base;
+	}
+	str[i] = '\0';
+	rev_str(str);
+	return (str);
+}

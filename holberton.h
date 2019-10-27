@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 /**
  * struct Checkstr - Struct to check format
  *
@@ -40,9 +41,10 @@ char *gen_d(const char *, int, va_list);
 char *gen_i(const char *, int, va_list);
 char *gen_o(const char *, int, va_list);
 char *gen_b(const char *, int, va_list);
+char *gen_x(const char *, int, va_list);
+char *gen_X(const char *, int, va_list);
 int check_specs(const char *s, int *p);
 void _memcpy(char *dest,  const char *src, unsigned int n);
-
 void print_number_str(int n, char *str);
 
 #endif
