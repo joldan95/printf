@@ -53,34 +53,23 @@ int _printf(const char *format, ...)
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
 			{
 				/* Generate_malloc function */
-				str = generate_malloc(format + i, j_spec, list);
-				lenstr = _strlen(str);
+				str = generate_malloc(format + i, j_spec, list), lenstr = _strlen(str);
 				/* Copies the str to the buffer */
 				_memcpy(buffer + i_buffer, str, lenstr);
 			}
 			else
 			{
-				/* Copies '%' to the buffer */
+				/* if --> Copies '%' to the buffer */
+				/* else --> Copies the string from format[i] to format[i + j_spec] */
 				if (format[i + 1] == '%')
-				{
-					_memcpy(buffer + i_buffer, format + i, 1);
-					j_spec = 2;
-					lenstr = 1;
-				}
+					_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
 				else
-				{
-					/* Copies the string from format[i] to format[i + j_spec */
-					_memcpy(buffer + i_buffer, format + i, j_spec);
-					lenstr = j_spec;
-				}
+					_memcpy(buffer + i_buffer, format + i, j_spec), lenstr = j_spec;
 			}
-			i += j_spec;
-			i_buffer += lenstr;
+			i += j_spec, i_buffer += lenstr;
 			continue;
 		}
-		_memcpy(buffer + i_buffer, format + i, 1);
-		i++;
-		i_buffer++;
+		_memcpy(buffer + i_buffer, format + i, 1), i++, i_buffer++;
 	}
 	va_end(list);
 	i_buffer = write(1, buffer, i_buffer);
