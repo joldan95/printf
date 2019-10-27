@@ -129,3 +129,36 @@ char *gen_p(const char *pattern, int len_p, va_list list)
 	rev_str(str);
 	return (str);
 }
+/**
+ * gen_u - Generates an unsigned number conversion written to a string
+ * @pattern: Pattern to follow to print the adress
+ * @len_p: Length of the pattern
+ * @list: list of arguments of the pattern
+ *
+ * Generates an unsigned int written to a string, following
+ * the pattern inserted by parameter.
+ * The pattern was already checked.
+ * The next argument in list corresponds to the argument to print
+ *
+ * Return: A pointer to the string
+ * NULL if could not allocate the memory for the operation
+ */
+char *gen_u(const char *pattern, int len_p, va_list list)
+{
+	int len_int;
+	unsigned long int number, base = 10;
+	char *str;
+
+	(void) pattern;
+	(void) len_p;
+	number = va_arg(list, unsigned int);
+
+	len_int = blen(number, base);
+	str = malloc(len_int + 1);
+	if (str == NULL)
+		return (0);
+
+	str[len_int] = '\0';
+	print_number_str_u(number, str);
+	return (str);
+}
