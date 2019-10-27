@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 	buffer = malloc(1024);
 	if (buffer == NULL)
 		return (0);
-	while (format[i] && format)
+	while (format && format[i])
 	{
 		j_spec = 0;
 		if (format[i] == '%')
@@ -130,4 +130,20 @@ void _memcpy(char *dest, char *src, unsigned int n)
 	}
 
 	/* return (dest); */
+}
+
+/**
+ * _strlen - return the length of a string
+ * @s: Pointer to an string
+ *
+ * Return: Length of the string
+ */
+int _strlen(char *s)
+{
+	int i = 0;
+
+	while (*(s + i) != '\0')
+		i++;
+
+	return (i);
 }
