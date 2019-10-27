@@ -100,13 +100,26 @@ char *gen_X(const char *pattern, int len_p, va_list list)
  */
 char *gen_p(const char *pattern, int len_p, va_list list)
 {
-	unsigned long int i = 0, base = 16, n;
+	unsigned long int i = 0, j, base = 16, n;
 	char *str;
+	char *p;
 
 	(void) pattern;
 	(void) len_p;
+	p =  va_arg(list, void *);
 
-	n = (unsigned long int) va_arg(list, void *);
+	if (p == 0)
+	{
+		p = "(nil)";
+		str = malloc(6);
+		if (str == 0)
+			return (0);
+		for (j = 0; j <= 5; j++)
+			str[j] = p[j];
+		return (str);
+	}
+
+	n = (unsigned long int)p;
 
 	if (n != 0)
 		str = malloc(blen(n, base) + 1 + 2);
@@ -160,5 +173,64 @@ char *gen_u(const char *pattern, int len_p, va_list list)
 
 	str[len_int] = '\0';
 	print_number_str_u(number, str);
+	return (str);
+}
+/**
+ * gen_S - Generates an string with no special characters written to a buffer
+ * @pattern: Pattern to follow to print the adress
+ * @len_p: Length of the pattern
+ * @list: list of arguments of the pattern
+ *
+ * Generates an string with no special characters
+ * the pattern inserted by parameter.
+ * The pattern was already checked.
+ * The next argument in list corresponds to the argument to print
+ *
+ * Non printable characters (0 < ASCII < 32 or >= 127) are printed this way:
+ * \x, followed by the ASCII code value in hexadecimal
+ * (upper case - always 2 characters)
+ *
+ * Return: A pointer to the string
+ * NULL if could not allocate the memory for the operation
+ */
+char *gen_S(const char *pattern, int len_p, va_list list)
+{
+
+	char *str, *s, *hx;
+	int i, j, l, count = 0;
+
+	(void) pattern;
+	(void) len_p;
+
+	s = va_arg(list, char *);
+	if (s == 0)
+		s = "(null)";
+	l = _strlen(s);
+	for (i = 0; i <= l; i++)
+		if ((s[i] > 0 && s[i] < 32) || s[i] >= 127)
+			count += 1;
+	l = l + (count * 3);
+
+	str = malloc(l + 1);
+	if (str == 0)
+		return (0);
+
+	for (i = 0, j = 0; s[j] != 0; i++, j++)
+	{
+		if ((s[j] > 0 && s[j] < 32) || s[j] >= 127)
+		{
+			hx = hexS(s[j]);
+			str[i] = '\\', i++;
+			str[i] = 'x', i++;
+			str[i] = hx[0], i++;
+			str[i] = hx[1];
+			free(hx);
+		}
+		else
+		{
+			str[i] = s[j];
+		}
+	}
+	str[i] = '\0';
 	return (str);
 }

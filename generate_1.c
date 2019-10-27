@@ -54,6 +54,9 @@ char *gen_s(const char *pattern, int len_p, va_list list)
 	(void) len_p;
 
 	s = va_arg(list, char *);
+	if (s == 0)
+		s = "(null)";
+
 	while (s[l])
 		l++;
 
