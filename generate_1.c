@@ -84,10 +84,10 @@ char *gen_o(const char *pattern, int len_p, va_list list)
  */
 char *gen_b(const char *pattern, int len_p, va_list list)
 {
-	int i = 0, base = 2;
+	int i = 0, base = 2, n;
 	char *str;
 
-	number = va_arg(list, int);
+	n = va_arg(list, int);
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else
