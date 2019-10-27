@@ -78,7 +78,7 @@ int check_format(const char *formspec, int j)
 	for (h = 0; h < 13; h++)
 		if (formspec[j - 1] == flagcheck[h].flag)
 			break;
-	for (k = 0; formspec[k] != 0; k++)
+	for (k = 0; k < j; k++)
 	{
 		for (z = 0; flagcheck[h].flagnot[z] != 0; z++)
 		{
