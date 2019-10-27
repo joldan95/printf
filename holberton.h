@@ -2,6 +2,8 @@
 #define HOLBERTON_H
 
 #include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>
 /**
  * struct Checkstr - Struct to check format
  *
@@ -27,28 +29,29 @@ typedef struct Specs_t
 } specs_t;
 int _printf(const char *format, ...);
 int _strlen(char *s);
+int blen(int n, int base);
 int check_format(char *formspec, int j);
-char *generate_malloc(char *s, int len_p, va_list list);
-char *gen_c(char *, int, va_list);
-char *gen_s(char *, int, va_list);
-char *gen_S(char *, int, va_list);
-char *gen_d(char *, int, va_list);
-char *gen_i(char *, int, va_list);
-char *gen_o(char *, int, va_list);
-char *gen_u(char *, int, va_list);
-char *gen_x(char *, int, va_list);
-char *gen_X(char *, int, va_list);
-char *gen_b(char *, int, va_list);
-char *gen_u(char *, int, va_list);
-char *gen_p(char *, int, va_list);
-char *gen_r(char *, int, va_list);
-char *gen_R(char *, int, va_list);
+char *generate_malloc(const char *s, int len_p, va_list list);
+char *gen_c(const char *, int, va_list);
+char *gen_s(const char *, int, va_list);
+char *gen_S(const char *, int, va_list);
+char *gen_d(const char *, int, va_list);
+char *gen_i(const char *, int, va_list);
+char *gen_o(const char *, int, va_list);
+char *gen_u(const char *, int, va_list);
+char *gen_x(const char *, int, va_list);
+char *gen_X(const char *, int, va_list);
+char *gen_b(const char *, int, va_list);
+char *gen_u(const char *, int, va_list);
+char *gen_p(const char *, int, va_list);
+char *gen_r(const char *, int, va_list);
+char *gen_R(const char *, int, va_list);
 
 int check_specs(char *s, int *p);
-void _memcpy(char *dest, char *src, unsigned int n);
+void _memcpy(char *dest,  const char *src, unsigned int n);
 
 void print_number_str(int n, char *str);
 
-char *get_integer(char *pattern, int len_p, va_list list);
+
 
 #endif

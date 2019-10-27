@@ -1,6 +1,4 @@
-#include <stdlib.h>
-#include <stdarg.h>
-
+#include "holberton.h"
 /**
  * get_integer - Generates an integer wrote to a string
  * @pattern: Pattern to follow to print the integer
@@ -15,7 +13,7 @@
  * Return: A pointer to the string
  * NULL if could not allocate the memory for the operation
  */
-char *gen_i(char *pattern, int len_p, va_list list)
+char *gen_i(const char *pattern, int len_p, va_list list)
 {
     int i;
     int len_int;
@@ -28,7 +26,7 @@ char *gen_i(char *pattern, int len_p, va_list list)
         return NULL;
 
     str[len_int] = '\0';
-    p_number(number, str);
+    print_number_str(number, str);
     return (str);
 
 }

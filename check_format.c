@@ -39,7 +39,7 @@ int whichflag(char formspec)
  *
  * Return: 1 if correct, 0 if incorrect
  */
-int check_order(char *formspec, int j)
+int check_order(const char *formspec, int j)
 {
 	int h, flagtmp1, flagtmp2;
 
@@ -63,7 +63,7 @@ int check_order(char *formspec, int j)
  *
  * Return: 1 if correct, 0 if incorrect
  */
-int check_format(char *formspec, int j)
+int check_format(const char *formspec, int j)
 {
 	int h, k, z, check, zeropass = 0, star1 = 1, star2 = 1;
 	checkstr flagcheck[] = {

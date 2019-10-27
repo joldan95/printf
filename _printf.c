@@ -1,4 +1,3 @@
-#include <stdarg.h>
 #include "holberton.h"
 
 /**
@@ -87,7 +86,7 @@ int _printf(const char *format, ...)
  * Return: 0 if does not find a conversion specifier
  * 1 if find a conversition specifier
  */
-int check_specs(char *s, int *p)
+int check_specs(const char *s, int *p)
 {
 	char *specs = "csSdioxXburRp";
 	int i = 0, j;
@@ -119,7 +118,7 @@ int check_specs(char *s, int *p)
  *
  * Return: Nothing(?)
  */
-void _memcpy(char *dest, char *src, unsigned int n)
+void _memcpy(char *dest, const char *src, unsigned int n)
 {
 	unsigned int i = 0;
 
