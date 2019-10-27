@@ -1,3 +1,4 @@
+#include "holberton.h"
 /**
  * whichflag - checks for flag type of a char
  *
@@ -8,7 +9,7 @@
 int whichflag(char formspec)
 {
 	char *flags = " 0+-#";
-	char *width = "123456789";
+	char *width = "123456789*";
 	char *precision = ".";
 	char *leng = "lh";
 	int i, flagnumber = 0;
@@ -31,7 +32,31 @@ int whichflag(char formspec)
 	return (flagnumber);
 }
 /**
- * check_format - checks if a flag format in correct
+ * check_order - checks if order of flags is correct
+ *
+ * @formspec: flags %+50d format
+ * @j: length of format
+ *
+ * Return: 1 if correct, 0 if incorrect
+ */
+int check_order(char *formspec, int j)
+{
+	int h, flagtmp1, flagtmp2;
+
+	for (h = 0; h < j - 2; h++)
+	{
+		flagtmp1 = whichflag(formspec[h]), flagtmp2 = whichflag(formspec[h + 1]);
+		if (flagtmp1 == 2 && (flagtmp2 == 1 && formspec[h + 1] != '0'))
+			return (0);
+		if (flagtmp1 == 3 && (flagtmp2 == 1 && formspec[h + 1] != '0'))
+			return (0);
+		if (flagtmp1 == 4 && flagtmp2 >= 0)
+			return (0);
+	}
+	return (1);
+}
+/**
+ * check_format - checks if a flag format is correct
  *
  * @formspec: flags %+50d format
  * @j: length of format
@@ -40,11 +65,13 @@ int whichflag(char formspec)
  */
 int check_format(char *formspec, int j)
 {
-	int h, k, z, check, flagtmp1, flagtmp2, zeropass = 0, starpass = 1;
+	int h, k, z, check, zeropass = 0, star1 = 1, star2 = 1;
 	checkstr flagcheck[] = {
-		{'c', " 0+#lh."}, {'s', " 0+#lh"}, {'S', " 0+#lh"},
-		{'d', "#"}, {'i', "#"}, {'u', " +#"},
-		{'b', " +#lh"}, {'o', " +"}, {'x', " +"}, {'X', " +"},
+		{'c', " 0+#lh."},
+		{'s', " 0+#lh"}, {'S', " 0+#lh"},
+		{'d', "#"}, {'i', "#"},
+		{'u', " +#"}, {'b', " +#lh"},
+		{'o', " +"}, {'x', " +"}, {'X', " +"},
 		{'p', " 0+#lh."}, {'r', " 0+#lh"}, {'R', " 0+#lh"}
 	};
 	/* Check Specifier and if flag cannot go with it*/
@@ -57,27 +84,22 @@ int check_format(char *formspec, int j)
 		{
 			if (whichflag(formspec[k]) == 2 || whichflag(formspec[k]) == 3)
 				zeropass = 1;
-			if ((whichflag(formspec[k]) == 2 || formspec[k] == '0') && starpass == 0)
+			if ((formspec[k] == 2 || formspec[k] == '0') && star1 == 0)
+				return (0);
+			if (formspec[k] == '*' && (star1 == 0 || star2 == 0))
+				return (0);
+			if ((whichflag(formspec[k]) == 2 || formspec[k] == '0') && star1 == 0)
 				return (0);
 			if (formspec[k] == flagcheck[h].flagnot[z] && zeropass == 0)
 				return (0);
-			if (whichflag(formspec[k]) == 2)
-				starpass = 0;
-			if (formspec[k] == '0' && whichflag(formspec[k - 1]) == 3)
-				starpass = 0;
+			if (whichflag(formspec[k]) == 2 && formspec[k] == '*')
+				star1 = 0;
+			if ((whichflag(formspec[k]) == 2 && formspec[k] != '*')
+			    || (formspec[k] == '0' && zeropass == 1))
+				star2 = 0;
 			if (whichflag(formspec[k]) == 3)
-				starpass = 1;
+				star1 = 1, star2 = 1;
 		}
 	}
-	for (h = 0; h < j - 2; h++)
-	{
-		flagtmp1 = whichflag(formspec[h]), flagtmp2 = whichflag(formspec[h + 1]);
-		if (flagtmp1 == 2 && (flagtmp2 == 1 && formspec[h + 1] != '0'))
-			return (0);
-		if (flagtmp1 == 3 && (flagtmp2 == 1 && formspec[h + 1] != '0'))
-			return (0);
-		if (flagtmp1 == 4 && flagtmp2 >= 0)
-			return (0);
-	}
-	return (1);
+	return (check_order(formspec, j));
 }
