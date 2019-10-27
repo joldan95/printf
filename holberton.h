@@ -30,6 +30,7 @@ typedef struct Specs_t
 int _printf(const char *format, ...);
 int _strlen(char *s);
 int blen(int n, int base);
+void rev_str(char *s);
 int check_format(const char *formspec, int j);
 char *generate_malloc(const char *s, int len_p, va_list list);
 char *gen_d(const char *, int, va_list);
