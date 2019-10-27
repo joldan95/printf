@@ -25,7 +25,8 @@ typedef struct Specs_t
 	char s;
 	char *(*f)(char *, int, va_list);
 } specs_t;
-
+int _printf(const char *format, ...);
+int _strlen(char *s);
 int check_format(char *formspec, int j);
 char *generate_malloc(char *s, int len_p, va_list list);
 char *gen_c(char *, int, va_list);
