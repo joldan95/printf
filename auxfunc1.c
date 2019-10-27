@@ -8,7 +8,7 @@
  *
  * Return: Nothing
  */
-void print_number_str(int n, char *str)
+void print_number_str(long int n, char *str)
 {
 	int i = 0;
 	int s;

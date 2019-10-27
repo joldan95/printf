@@ -52,6 +52,6 @@ char *gen_r(const char *, int, va_list);
 char *gen_R(const char *, int, va_list);
 int check_specs(const char *s, int *p);
 void _memcpy(char *dest,  const char *src, unsigned int n);
-void print_number_str(int n, char *str);
+void print_number_str(long int n, char *str);
 void print_number_str_u(unsigned long int n, char *str);
 #endif
