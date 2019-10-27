@@ -101,8 +101,7 @@ char *gen_X(const char *pattern, int len_p, va_list list)
 char *gen_p(const char *pattern, int len_p, va_list list)
 {
 	unsigned long int i = 0, j, base = 16, n;
-	char *str;
-	char *p;
+	char *str, *p;
 
 	(void) pattern;
 	(void) len_p;
@@ -120,12 +119,10 @@ char *gen_p(const char *pattern, int len_p, va_list list)
 	}
 
 	n = (unsigned long int)p;
-
 	if (n != 0)
 		str = malloc(blen(n, base) + 1 + 2);
 	else
 		str = malloc(1 + 1 + 2), str[i] = '0', i++;
-
 	if (str == 0)
 		return (0);
 
