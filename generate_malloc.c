@@ -14,6 +14,8 @@ char *generate_malloc(const char *s, int len_p, va_list list)
 	char *(*f)(const char *, int, va_list);
 	char *fx = 0;
 	specs_t tspecs[] = {
+		{'c', gen_c},
+		{'s', gen_s},
 		{'d', gen_i},
 		{'i', gen_i},
 		{'o', gen_o},

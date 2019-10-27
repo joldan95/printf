@@ -30,9 +30,12 @@ typedef struct Specs_t
 int _printf(const char *format, ...);
 int _strlen(char *s);
 int blen(unsigned long int n, unsigned long int base);
+int blen10(long int n, long int base);
 void rev_str(char *s);
 int check_format(const char *formspec, int j);
 char *generate_malloc(const char *s, int len_p, va_list list);
+char *gen_c(const char *, int, va_list);
+char *gen_s(const char *, int, va_list);
 char *gen_d(const char *, int, va_list);
 char *gen_i(const char *, int, va_list);
 char *gen_o(const char *, int, va_list);
@@ -41,7 +44,5 @@ int check_specs(const char *s, int *p);
 void _memcpy(char *dest,  const char *src, unsigned int n);
 
 void print_number_str(int n, char *str);
-
-
 
 #endif
