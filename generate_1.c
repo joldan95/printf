@@ -15,7 +15,7 @@
  * Return: A pointer to the string
  * NULL if could not allocate the memory for the operation
  */
-char *get_integer(char *pattern, int len_p, va_list list)
+char *gen_i(char *pattern, int len_p, va_list list)
 {
     int i;
     int len_int;
