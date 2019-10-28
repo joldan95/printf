@@ -13,7 +13,7 @@
  * Return: A pointer to the string
  * NULL if could not allocate the memory for the operation
  */
-char *gen_c(const char *pattern, int len_p, va_list list)
+char *gen_c(const char *pattern, int len_p, va_list list, int *len)
 {
 	char *str;
 	char c;
@@ -29,6 +29,7 @@ char *gen_c(const char *pattern, int len_p, va_list list)
 
 	str[0] = c;
 	str[1] = '\0';
+	*len = w + 1;
 	app_flags(pattern, len_p, str, w, 0);
 	return (str);
 }
@@ -46,11 +47,12 @@ char *gen_c(const char *pattern, int len_p, va_list list)
  * Return: A pointer to the string
  * NULL if could not allocate the memory for the operation
  */
-char *gen_s(const char *pattern, int len_p, va_list list)
+char *gen_s(const char *pattern, int len_p, va_list list, int *len)
 {
 	char *str, *s;
 	int i, l = 0, w, p;
 
+	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	s = va_arg(list, char *);
@@ -83,12 +85,13 @@ char *gen_s(const char *pattern, int len_p, va_list list)
  * Return: A pointer to the string
  * NULL if could not allocate the memory for the operation
  */
-char *gen_i(const char *pattern, int len_p, va_list list)
+char *gen_i(const char *pattern, int len_p, va_list list, int *len)
 {
 	int len_int, w, p;
 	long int number, base = 10;
 	char *str;
 
+	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	number = get_param(pattern, len_p, list);
@@ -118,12 +121,13 @@ char *gen_i(const char *pattern, int len_p, va_list list)
  * Return: A pointer to the string
  * NULL if could not allocate the memory for the operation
  */
-char *gen_o(const char *pattern, int len_p, va_list list)
+char *gen_o(const char *pattern, int len_p, va_list list, int *len)
 {
 	int w, p;
 	unsigned long int i = 0, base = 8, n;
 	char *str;
 
+	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	n = get_param_u(pattern, len_p, list);
@@ -161,12 +165,13 @@ char *gen_o(const char *pattern, int len_p, va_list list)
  * Return: A pointer to the string
  * NULL if could not allocate the memory for the operation
  */
-char *gen_b(const char *pattern, int len_p, va_list list)
+char *gen_b(const char *pattern, int len_p, va_list list, int *len)
 {
 	int w, p;
 	unsigned long int i = 0, base = 2, n;
 	char *str;
 
+	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	n = get_param_u(pattern, len_p, list);
