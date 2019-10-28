@@ -84,20 +84,22 @@ char *gen_s(const char *pattern, int len_p, va_list list)
  */
 char *gen_i(const char *pattern, int len_p, va_list list)
 {
-	int len_int;
+	int len_int, w, p;
 	long int number, base = 10;
 	char *str;
 
-	(void) pattern;
-	(void) len_p;
-	number = va_arg(list, int);
+	w = get_width(pattern, len_p, list);
+	p = get_precision(pattern, len_p, list);
+	number = get_param(pattern, len_p, list);
+
 	len_int = blen10(number, base);
-	str = malloc(len_int + 1);
+	str = malloc((w + p + len_int + 1) + 1);
 	if (str == NULL)
 		return (0);
 
-	str[len_int] = '\0';
+	/* str[len_int] = '\0'; */
 	print_number_str(number, str);
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 
 }
@@ -120,9 +122,10 @@ char *gen_o(const char *pattern, int len_p, va_list list)
 	unsigned long int i = 0, base = 8, n;
 	char *str;
 
-	(void) pattern;
-	(void) len_p;
-	n = va_arg(list, unsigned int);
+	/* (void) pattern; */
+	/* (void) len_p; */
+	/* n = va_arg(list, unsigned int); */
+	n = get_param_u(pattern, len_p, list);
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else
@@ -159,9 +162,10 @@ char *gen_b(const char *pattern, int len_p, va_list list)
 	unsigned long int i = 0, base = 2, n;
 	char *str;
 
-	(void) pattern;
-	(void) len_p;
-	n = va_arg(list, unsigned int);
+	/* (void) pattern; */
+	/* (void) len_p; */
+	/* n = va_arg(list, unsigned int); */
+	n = get_param_u(pattern, len_p, list);
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else
