@@ -45,7 +45,6 @@ int _printf(const char *format, ...)
 	va_start(list, format);
 	while (format && format[i])
 	{
-		j_spec = 0;
 		if (format[i] == '%')
 		{
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
@@ -56,15 +55,15 @@ int _printf(const char *format, ...)
 					free(buffer);
 					return (-1);
 				}
-				_memcpy(buffer + i_buffer, str, lenstr);
-				free(str);
+				_memcpy(buffer + i_buffer, str, lenstr), free(str);
+			}
+			else if (format[i + 1] == '%')
+			{
+				_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
 			}
 			else
 			{
-				if (format[i + 1] == '%')
-					_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
-				else
-					_memcpy(buffer + i_buffer, format + i, j_spec), lenstr = j_spec;
+				_memcpy(buffer + i_buffer, format + i, j_spec), lenstr = j_spec;
 			}
 			i += j_spec, i_buffer += lenstr;
 			continue;
@@ -88,7 +87,7 @@ int check_specs(const char *s, int *p)
 {
 	char *specs = "csSdioxXburRp";
 	char *flags = " 0-+#123456789.lh";
-	int i = 0, j;
+	int i = 0, j = 0, len_flags = _strlen(flags);
 
 	while (s[i] && (i == 0 || s[i] != '%'))
 	{
@@ -109,6 +108,8 @@ int check_specs(const char *s, int *p)
 				break;
 			j++;
 		}
+		if (i > 0 && j == len_flags)
+			break;
 		i++;
 	}
 	*p = i;
@@ -156,3 +157,8 @@ int _strlen(char *s)
 
 	return (i);
 }
+
+/**
+ * free_buffer - Checks the state of a buffer a liberates the other
+ *
+ */
