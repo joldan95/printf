@@ -43,7 +43,7 @@ int check_specs(const char *s, int *p);
 void _memcpy(char *dest,  const char *src, unsigned int n);
 void print_number_str(long int n, char *str);
 void print_number_str_u(unsigned long int n, char *str);
-int free_buffer(char *);
+int free_buffer(char *, int);
 
 /* Generate strings functions */
 char *generate_malloc(const char *s, int len_p, va_list list, int *);

@@ -52,13 +52,13 @@ int _printf(const char *format, ...)
 				str = generate_malloc(format + i, j_spec, list, &lenstr);
 				lenstr = format[j_spec - 1] == 'c' ? lenstr : _strlen(str);
 				if (str == NULL)
-					return (free_buffer(buffer));
+					return (free_buffer(buffer, i_buffer));
 				_memcpy(buffer + i_buffer, str, lenstr), free(str);
 				i += j_spec, i_buffer += lenstr;
 				continue;
 			}
 			if (format[i + 1] == '\0')
-				return (free_buffer(buffer));
+				return (free_buffer(buffer, i_buffer));
 			if (format[i + 1] == '%')
 				_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
 			else
@@ -155,13 +155,15 @@ int _strlen(char *s)
 }
 
 /**
- * free_buffer - Frees a buffer and returns 1
+ * free_buffer - Writes the content of the buffer and frees it
  * @buff: Buffer to free
+ * @len: Bytes to write
  *
  * Return: Always -1 (Success)
  */
-int free_buffer(char *buff)
+int free_buffer(char *buff, int len)
 {
+	write(1, buff, len);
 	free(buff);
 	return (-1);
 }
