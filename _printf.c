@@ -74,7 +74,7 @@ int _printf(const char *format, ...)
 		_memcpy(buffer + i_buffer, format + i, 1), i++, i_buffer++;
 	}
 	va_end(list), i_buffer = write(1, buffer, i_buffer), free(buffer);
-	return (i == 0 ? -1 : i_buffer);
+	return (i == 0 && !format ? -1 : i_buffer);
 }
 
 /**
