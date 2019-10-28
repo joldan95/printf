@@ -54,7 +54,7 @@ int app_precision(char *buffer, int pr, int is_str)
 	/* If is string, the precision truncates the length of the string*/
 	if (is_str)
 	{
-		if(pr < len_buff)
+		if (pr < len_buff)
 			buffer[pr] = '\0', val = pr;
 		else
 			val = len_buff;

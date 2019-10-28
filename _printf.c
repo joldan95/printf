@@ -48,7 +48,7 @@ int _printf(const char *format, ...)
 		j_spec = 0;
 		if (format[i] == '%')
 		{
-			/* Check whether exists a conversion specifier or not and if format is right */
+			/* Check whether exists a conversion specifier and if format is right */
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
 			{
 				/* Generate_malloc function */
