@@ -51,6 +51,7 @@ void print_number_str_u(unsigned long int n, char *str)
 		d /= 10;
 		i++;
 	}
+	*(str + i + s) = '\0';
 }
 /**
  * rev_str - Reverses a string
