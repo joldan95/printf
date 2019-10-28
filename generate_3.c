@@ -57,7 +57,7 @@ char *gen_r(const char *pattern, int len_p, va_list list)
 char *gen_R(const char *pattern, int len_p, va_list list)
 {
 	char *str, *s;
-	int i, l = 0;
+	int i, l = 0, w, p;
 
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);

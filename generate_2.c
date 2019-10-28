@@ -87,7 +87,7 @@ char *gen_X(const char *pattern, int len_p, va_list list)
 	str[i] = '\0';
 	rev_str(str);
 
-	app_flags(pattern, len_p, strt, w, p);
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }
 /**
@@ -121,7 +121,7 @@ char *gen_p(const char *pattern, int len_p, va_list list)
 			return (0);
 		for (j = 0; j <= 5; j++)
 			str[j] = p[j];
-		app_flags(pattern, len_p, str, w, p);
+		app_flags(pattern, len_p, str, w, 0);
 		return (str);
 	}
 
@@ -144,7 +144,7 @@ char *gen_p(const char *pattern, int len_p, va_list list)
 	str[i] = 'x', str[i + 1] = '0';
 	str[i + 2] = '\0';
 	rev_str(str);
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, w, 0);
 	return (str);
 }
 /**

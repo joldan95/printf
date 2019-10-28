@@ -29,7 +29,7 @@ char *gen_c(const char *pattern, int len_p, va_list list)
 
 	str[0] = c;
 	str[1] = '\0';
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, w, 0);
 	return (str);
 }
 /**
