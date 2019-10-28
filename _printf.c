@@ -56,24 +56,25 @@ int _printf(const char *format, ...)
 					return (-1);
 				}
 				_memcpy(buffer + i_buffer, str, lenstr), free(str);
+				i += j_spec, i_buffer += lenstr;
+				continue;
 			}
-			else if (format[i + 1] == '%')
+			else if (format[i + 1] == '\0')
 			{
+				free(buffer);
+				return (-1);
+			}
+			if (format[i + 1] == '%')
 				_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
-			}
 			else
-			{
 				_memcpy(buffer + i_buffer, format + i, j_spec), lenstr = j_spec;
-			}
 			i += j_spec, i_buffer += lenstr;
 			continue;
 		}
 		_memcpy(buffer + i_buffer, format + i, 1), i++, i_buffer++;
 	}
-	va_end(list);
-	i_buffer = write(1, buffer, i_buffer);
-	free(buffer);
-	return (i_buffer);
+	va_end(list), i_buffer = write(1, buffer, i_buffer), free(buffer);
+	return (i == 0 ? -1 : i_buffer);
 }
 
 /**
