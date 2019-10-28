@@ -17,18 +17,19 @@ char *gen_c(const char *pattern, int len_p, va_list list)
 {
 	char *str;
 	char c;
+	int w;
 
-	(void) pattern;
-	(void) len_p;
-
+	w = get_width(pattern, len_p, list);
 	c = va_arg(list, int);
-	str = malloc(sizeof(char) * 2);
+	/* Width + char */
+	str = malloc(sizeof(char) * (2 + w));
 
 	if (str == 0)
 		return (0);
 
 	str[0] = c;
 	str[1] = '\0';
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }
 /**
@@ -48,24 +49,24 @@ char *gen_c(const char *pattern, int len_p, va_list list)
 char *gen_s(const char *pattern, int len_p, va_list list)
 {
 	char *str, *s;
-	int i, l = 0;
+	int i, l = 0, w, p;
 
-	(void) pattern;
-	(void) len_p;
-
+	w = get_width(pattern, len_p, list);
+	p = get_precision(pattern, len_p, list);
 	s = va_arg(list, char *);
 	if (s == 0)
 		s = "(null)";
 
 	while (s[l])
 		l++;
-
-	str = malloc(l + 1);
+	/* Width + length of the string */
+	str = malloc((w + l) + 1);
 	if (str == 0)
 		return (0);
 
 	for (i = 0; i <= l; i++)
 		str[i] = s[i];
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }
 /**
@@ -93,11 +94,11 @@ char *gen_i(const char *pattern, int len_p, va_list list)
 	number = get_param(pattern, len_p, list);
 
 	len_int = blen10(number, base);
+	/* Width + precision + length of integer + sign */
 	str = malloc((w + p + len_int + 1) + 1);
 	if (str == NULL)
 		return (0);
 
-	/* str[len_int] = '\0'; */
 	print_number_str(number, str);
 	app_flags(pattern, len_p, str, w, p);
 	return (str);
@@ -119,17 +120,18 @@ char *gen_i(const char *pattern, int len_p, va_list list)
  */
 char *gen_o(const char *pattern, int len_p, va_list list)
 {
+	int w, p;
 	unsigned long int i = 0, base = 8, n;
 	char *str;
 
-	/* (void) pattern; */
-	/* (void) len_p; */
-	/* n = va_arg(list, unsigned int); */
+	w = get_width(pattern, len_p, list);
+	p = get_precision(pattern, len_p, list);
 	n = get_param_u(pattern, len_p, list);
+	/* Width + precision + length of number + # */
 	if (n != 0)
-		str = malloc(blen(n, base) + 1);
+		str = malloc((w + p + blen(n, base) + 1) + 1);
 	else
-		str = malloc(1 + 1), str[i] = '0', i++;
+		str = malloc((w + p + 1) + 1), str[i] = '0', i++;
 
 	if (str == 0)
 		return (0);
@@ -141,6 +143,8 @@ char *gen_o(const char *pattern, int len_p, va_list list)
 	}
 	str[i] = '\0';
 	rev_str(str);
+
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }
 /**
@@ -159,17 +163,18 @@ char *gen_o(const char *pattern, int len_p, va_list list)
  */
 char *gen_b(const char *pattern, int len_p, va_list list)
 {
+	int w, p;
 	unsigned long int i = 0, base = 2, n;
 	char *str;
 
-	/* (void) pattern; */
-	/* (void) len_p; */
-	/* n = va_arg(list, unsigned int); */
+	w = get_width(pattern, len_p, list);
+	p = get_precision(pattern, len_p, list);
 	n = get_param_u(pattern, len_p, list);
+	/* Width + precision + length of number */
 	if (n != 0)
-		str = malloc(blen(n, base) + 1);
+		str = malloc((w + p + blen(n, base)) + 1);
 	else
-		str = malloc(1 + 1), str[i] = '0', i++;
+		str = malloc((w + p + 1) + 1), str[i] = '0', i++;
 
 	if (str == 0)
 		return (0);
@@ -182,5 +187,6 @@ char *gen_b(const char *pattern, int len_p, va_list list)
 	str[i] = '\0';
 	rev_str(str);
 
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }

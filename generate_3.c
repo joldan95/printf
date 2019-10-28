@@ -17,11 +17,10 @@
 char *gen_r(const char *pattern, int len_p, va_list list)
 {
 	char *str, *s;
-	int i, l = 0;
+	int i, l = 0, w, p;
 
-	(void) pattern;
-	(void) len_p;
-
+    w = get_width(pattern, len_p, list);
+    p = get_precision(pattern, len_p, list);
 	s = va_arg(list, char *);
 	if (s == 0)
 		s = ")llun(";
@@ -29,7 +28,7 @@ char *gen_r(const char *pattern, int len_p, va_list list)
 	while (s[l])
 		l++;
 
-	str = malloc(l + 1);
+	str = malloc((w + l) + 1);
 	if (str == 0)
 		return (0);
 
@@ -37,6 +36,8 @@ char *gen_r(const char *pattern, int len_p, va_list list)
 		str[i] = s[i];
 
 	rev_str(str);
+
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }
 /**
@@ -58,15 +59,14 @@ char *gen_R(const char *pattern, int len_p, va_list list)
 	char *str, *s;
 	int i, l = 0;
 
-	(void) pattern;
-	(void) len_p;
-
+    w = get_width(pattern, len_p, list);
+	p = get_precision(pattern, len_p, list);
 	s = va_arg(list, char *);
 	if (s == 0)
 		s = "(ahyy)";
 
 	l = _strlen(s);
-	str = malloc(l + 1);
+	str = malloc(w + l + 1);
 	if (str == 0)
 		return (0);
 
@@ -74,5 +74,6 @@ char *gen_R(const char *pattern, int len_p, va_list list)
 		str[i] = s[i];
 
 	rot13(str);
+	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }
