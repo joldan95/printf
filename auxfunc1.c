@@ -27,6 +27,7 @@ void print_number_str(long int n, char *str)
 		d /= 10;
 		i++;
 	}
+	*(str + i + sign) = '\0';
 }
 /**
  * print_number_str_u - Prints an unsigned number to the string inserted
