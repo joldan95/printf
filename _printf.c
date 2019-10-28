@@ -49,7 +49,8 @@ int _printf(const char *format, ...)
 		{
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
 			{
-				str = generate_malloc(format + i, j_spec, list), lenstr = _strlen(str);
+				str = generate_malloc(format + i, j_spec, list, &lenstr);
+				lenstr = format[j_spec - 1] == 'c' ? lenstr : _strlen(str);
 				if (str == NULL)
 					return (free_buffer(buffer));
 				_memcpy(buffer + i_buffer, str, lenstr), free(str);
