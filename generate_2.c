@@ -19,10 +19,7 @@ char *gen_x(const char *pattern, int len_p, va_list list)
 	unsigned long int i = 0, base = 16, n;
 	char *str;
 
-	(void) pattern;
-	(void) len_p;
-
-	n = va_arg(list, unsigned int);
+	n = get_param_u(pattern, len_p, list);
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else
@@ -61,10 +58,7 @@ char *gen_X(const char *pattern, int len_p, va_list list)
 	unsigned long int i = 0, base = 16, n;
 	char *str;
 
-	(void) pattern;
-	(void) len_p;
-
-	n = va_arg(list, unsigned int);
+	n = get_param_u(pattern, len_p, list);
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else
@@ -159,10 +153,7 @@ char *gen_u(const char *pattern, int len_p, va_list list)
 	unsigned long int number, base = 10;
 	char *str;
 
-	(void) pattern;
-	(void) len_p;
-	number = va_arg(list, unsigned int);
-
+	number = get_param_u(pattern, len_p, list);
 	len_int = blen(number, base);
 	str = malloc(len_int + 1);
 	if (str == NULL)
