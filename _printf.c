@@ -48,19 +48,19 @@ int _printf(const char *format, ...)
 		j_spec = 0;
 		if (format[i] == '%')
 		{
-			/* Check whether exists a conversion specifier and if format is right */
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
 			{
-				/* Generate_malloc function */
 				str = generate_malloc(format + i, j_spec, list), lenstr = _strlen(str);
-				/* Copies the str to the buffer */
+				if (str == NULL)
+				{
+					free(buffer);
+					return (-1);
+				}
 				_memcpy(buffer + i_buffer, str, lenstr);
 				free(str);
 			}
 			else
 			{
-				/* if --> Copies '%' to the buffer */
-				/* else --> Copies the string from format[i] to format[i + j_spec] */
 				if (format[i + 1] == '%')
 					_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
 				else
