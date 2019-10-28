@@ -5,15 +5,15 @@
 int main(void)
 {
 	int n = 2;
-	_printf("Hello-- c: %c s: %s %: %% d: %d o: %o b: %b x: %x X: %X p: %p u: %u S: %S r: %r R: %R --World\n", 35, 0, -54, 54, 54, 11238, 11238, &n, -1, "Holberton\nSchool", "Hello Holberton", "Uryyb Ubyoregba");
-
 	int len;
 	int len2;
 	unsigned int ui;
 	void *addr;
 
-	len = _printf("Let's try to printf a simple sentence.\n");
-	len2 = printf("Let's try to printf a simple sentence.\n");
+	_printf("Hello-- c: %c s: %s %: %% d: %d o: %o b: %b x: %x X: %X p: %p u: %u S: %S r: %r R: %R --World\n", 35, 0, -54, 54, 54, 11238, 11238, &n, -1, "Holberton\nSchool", "Hello Holberton", "Uryyb Ubyoregba");
+
+	len = _printf("Let's try to %x printf a simple sentence.\n", 89635);
+	len2 = printf("Let's try to %x printf a simple sentence.\n", 89635);
 	ui = (unsigned int)INT_MAX + 1024;
 	addr = (void *)0x7ffe637541f0;
 	_printf("Length:[%d, %i]\n", len, len);
