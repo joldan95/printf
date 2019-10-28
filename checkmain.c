@@ -40,10 +40,10 @@ int main(void)
 	printf("Unknown:[%y]\n");
 
 	_printf("----------------\nTest for integers\n----------------\n");
-	_printf("Normal: %.5s\n", "Hola Mundo");
-	_printf("Normal: %.2d\n", 578);
-	_printf("Normal: %.9d\n", -578);
-	_printf("Normal: %.2d\n", -578);
+	_printf("Normal: %.20s\n", "Hola Mundo");
+	_printf("Normal: %.5b\n", 4);
+	_printf("Normal: %.3o\n", 40);
+	_printf("Normal: %.5d\n", -578);
 	/* _printf("Long: %ld\n", 123456789123); */
 	/* _printf("Short: %hd\n", 123456789123); */
 	/* _printf("----------------\nTest for Octals\n----------------\n"); */
