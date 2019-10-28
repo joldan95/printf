@@ -8,10 +8,10 @@
  *
  * Return: 1 if correct, 0 if incorrect
  */
-char *generate_malloc(const char *s, int len_p, va_list list)
+char *generate_malloc(const char *s, int len_p, va_list list, int *len)
 {
 	int i;
-	char *(*f)(const char *, int, va_list);
+	char *(*f)(const char *, int, va_list, int *);
 	char *fx = 0;
 	specs_t tspecs[] = {
 		{'c', gen_c},
@@ -33,7 +33,7 @@ char *generate_malloc(const char *s, int len_p, va_list list)
 		if (s[len_p - 1] == tspecs[i].s)
 		{
 			f = tspecs[i].f;
-			fx = f(s, len_p, list);
+			fx = f(s, len_p, list, len);
 		}
 	/* Returns Pointer Malloec with number or string */
 	return (fx);

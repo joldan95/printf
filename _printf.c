@@ -49,21 +49,16 @@ int _printf(const char *format, ...)
 		{
 			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
 			{
-				str = generate_malloc(format + i, j_spec, list), lenstr = _strlen(str);
+				str = generate_malloc(format + i, j_spec, list, &lenstr);
+				lenstr = format[j_spec - 1] == 'c' ? lenstr : _strlen(str);
 				if (str == NULL)
-				{
-					free(buffer);
-					return (-1);
-				}
+					return (free_buffer(buffer));
 				_memcpy(buffer + i_buffer, str, lenstr), free(str);
 				i += j_spec, i_buffer += lenstr;
 				continue;
 			}
-			else if (format[i + 1] == '\0')
-			{
-				free(buffer);
-				return (-1);
-			}
+			if (format[i + 1] == '\0')
+				return (free_buffer(buffer));
 			if (format[i + 1] == '%')
 				_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
 			else
@@ -160,6 +155,13 @@ int _strlen(char *s)
 }
 
 /**
- * free_buffer - Checks the state of a buffer a liberates the other
+ * free_buffer - Frees a buffer and returns 1
+ * @buff: Buffer to free
  *
+ * Return: Always -1 (Success)
  */
+int free_buffer(char *buff)
+{
+	free(buff);
+	return (-1);
+}
