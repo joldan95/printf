@@ -37,6 +37,7 @@ int blen(unsigned long int n, unsigned long int base);
 int blen10(long int n, long int base);
 void rev_str(char *s);
 char *hexS(int n);
+char *rot13(char *s);
 int check_format(const char *formspec, int j);
 int check_specs(const char *s, int *p);
 void _memcpy(char *dest,  const char *src, unsigned int n);
@@ -56,6 +57,10 @@ char *gen_X(const char *, int, va_list);
 char *gen_p(const char *, int, va_list);
 char *gen_u(const char *, int, va_list);
 char *gen_S(const char *, int, va_list);
+char *gen_r(const char *, int, va_list);
+char *gen_R(const char *, int, va_list);
+
+
 
 /* Flags functions */
 unsigned int get_width(const char *pattern, int len_p, va_list list);
@@ -64,6 +69,8 @@ long int get_param(const char *pattern, int len_p, va_list list);
 unsigned long int get_param_u(const char *pattern, int len_p, va_list list);
 void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr);
 int app_precision(char *buffer, int pr, int is_str);
+
+
 
 
 #endif

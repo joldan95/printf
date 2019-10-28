@@ -35,3 +35,28 @@ char *hexS(int n)
 	rev_str(r);
 	return (r);
 }
+/**
+ * rot13 - encodes string to rot13
+ * @s: string to encode
+ *
+ * Return: pointer to string encoded
+ */
+char *rot13(char *s)
+{
+	int i, j;
+	char rot13a[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char rot13b[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	for (j = 0; s[j] != 0; j++)
+	{
+		for (i = 0; i < 52; i++)
+		{
+			if (s[j] == rot13a[i])
+			{
+				s[j] = rot13b[i];
+				break;
+			}
+		}
+	}
+	return (s);
+}
