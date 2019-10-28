@@ -62,5 +62,8 @@ unsigned int get_width(const char *pattern, int len_p, va_list list);
 unsigned int get_precision(const char *pattern, int len_p, va_list list);
 long int get_param(const char *pattern, int len_p, va_list list);
 unsigned long int get_param_u(const char *pattern, int len_p, va_list list);
+void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr);
+int app_precision(char *buffer, int pr, int is_str);
+
 
 #endif
