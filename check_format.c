@@ -68,7 +68,7 @@ int check_format(const char *formspec, int j)
 	int h, k, z, zeropass = 0, star1 = 1, star2 = 1;
 	checkstr flagcheck[] = {
 		{'c', " 0+#lh."},
-		{'s', " 0+#lh"}, {'S', " 0+#lh"},
+		{'s', "0+#lh"}, {'S', " 0+#lh"},
 		{'d', "#"}, {'i', "#"},
 		{'u', " +#"}, {'b', " +#lh"},
 		{'o', " +"}, {'x', " +"}, {'X', " +"},
