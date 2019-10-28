@@ -27,14 +27,12 @@ void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
 	if (pr)
 		len_buff = app_precision(buffer, pr, is_str);/* Applies precision */
 	/* if (wi && wi > len_buff) */
-	/* 	; *//* Applies width */
+/* Applies width */
 
 	/* Applies numeral */
 	/* Applies plus and space */
 	/* if (wi && wi > len_buff) */
-	/* 	; *//* Applies minus and 0 */
-
-
+/* Applies minus and 0 */
 	/* if (p > 0) */
 	/* {} */
 }
