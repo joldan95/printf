@@ -8,21 +8,21 @@
  *
  * Return: Nothing
  */
-void print_number_str(int n, char *str)
+void print_number_str(long int n, char *str)
 {
 	int i = 0;
-	int s;
-	unsigned int d = 1;
+	int sign;
+	unsigned long int d = 1;
 
 	n < 0 ? *str = '-' : 1;
-	s = n < 0 ? 1 : 0;
+	sign = n < 0 ? 1 : 0;
 	n *= n < 0 ? -1 : 1;
 	while (n / d > 9)
 		d *= 10;
 
 	while (d >= 1)
 	{
-		*(str + i + s) = (n / d + '0');
+		*(str + i + sign) = (n / d + '0');
 		n %= d;
 		d /= 10;
 		i++;
