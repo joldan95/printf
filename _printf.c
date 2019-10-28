@@ -41,7 +41,7 @@ int _printf(const char *format, ...)
 
 	buffer = malloc(1024);
 	if (buffer == NULL)
-		return (0);
+		return (-1);
 	va_start(list, format);
 	while (format && format[i])
 	{
@@ -87,6 +87,7 @@ int _printf(const char *format, ...)
 int check_specs(const char *s, int *p)
 {
 	char *specs = "csSdioxXburRp";
+	char *flags = " 0-+#123456789.lh";
 	int i = 0, j;
 
 	while (s[i] && (i == 0 || s[i] != '%'))
@@ -99,6 +100,13 @@ int check_specs(const char *s, int *p)
 				*p = i + 1;
 				return (1);
 			}
+			j++;
+		}
+		j = 0;
+		while (flags[j])
+		{
+			if (s[i] == flags[j])
+				break;
 			j++;
 		}
 		i++;
@@ -139,6 +147,7 @@ void _memcpy(char *dest, const char *src, unsigned int n)
 int _strlen(char *s)
 {
 	int i = 0;
+
 	if (s == NULL)
 		return (0);
 
