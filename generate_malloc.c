@@ -28,9 +28,10 @@ char *generate_malloc(const char *s, int len_p, va_list list, int *len)
 		{'S', gen_S},
 		{'r', gen_r},
 		{'R', gen_R},
+		{'%', gen_per},
 	};
-	/* 13 Specifiers */
-	for (i = 0; i < 13; i++)
+	/* 14 Specifiers */
+	for (i = 0; i < 14; i++)
 		if (s[len_p - 1] == tspecs[i].s)
 		{
 			f = tspecs[i].f;

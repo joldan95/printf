@@ -72,7 +72,7 @@ int check_format(const char *formspec, int j)
 		{'d', ""}, {'i', ""},
 		{'u', ""}, {'b', ""},
 		{'o', ""}, {'x', ""}, {'X', ""},
-		{'p', ""}, {'r', ""}, {'R', ""}
+		{'p', ""}, {'r', ""}, {'R', ""}, {'%', ""}
 	};
 	/* Check Specifier and if flag cannot go with it*/
 	for (h = 0; h < 13; h++)

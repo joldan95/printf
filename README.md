@@ -8,11 +8,11 @@ This project consists of a custom made printf function for C language that allow
 
 The function _printf() writes output to stdout, the standard output stream with the format and options presented below. It uses an internal buffer of 1024 bytes although it can print larger sets of data.
 
-Upon successful return, this function returns the number of characters printed (excluding the null byte used to end output to strings).
+Upon successful execution, this function returns the number of characters printed (excluding the null byte used to end output to strings).
 
 If an output error is encountered, a negative value of -1 is returned.
 
-Its prototype of the function is the next:
+The prototype of this function is the next:
 
 > **int _printf(const char *format, ...);***
 
@@ -25,17 +25,21 @@ The format string is a character string starting and ending with double quotes. 
 Each conversion specification is introduced by the character **%** and ends with a **conversion specifier**. In between there may be (in this order):
 
 > Zero or more **flags**
+>
 > An optional field **width**
+>
 > An optional **precision** modifier
+>
 > An optional **length** modifier
 
 
 **The flag characters**
+
 |**Flag**| Description  |
 |--|--|
 |**#**| For **o** conversions the first character of the output string is made zero (by prefixing a 0 if it was not zero already).  For **x** and **X** conversions, a nonzero result has the string "**0x**" or "**0X**" respectively added. |
-|**0**| The  value should be zero padded. For **d**, **i**, **o**, **u**, **x**, and **X** the converted value is padded on the left with zeros. If the 0 and **-** flags both appear,the **0** flag is ignored. If a precision is given with a numeric conversion, the **0** flag is ignored.|
-|**-**|(Minus sign) The converted value is to be left adjusted on the field boundary, (Default is right justification) and  padded  with  blanks  in  the right rather than on the left with blanks or zeros. This flag overrides **0** if both are given.|
+|**0**| (Not implemented yet) The  value should be zero padded. For **d**, **i**, **o**, **u**, **x**, and **X** the converted value is padded on the left with zeros. If the 0 and **-** flags both appear,the **0** flag is ignored. If a precision is given with a numeric conversion, the **0** flag is ignored.|
+|**-**|(Minus sign, not implemented yet) The converted value is to be left adjusted on the field boundary, (Default is right justification) and  padded  with  blanks  in  the right rather than on the left with blanks or zeros. This flag overrides **0** if both are given.|
 |' '| (Blank Space) The argument is padded with a single blank space before a positive number or empty string produced by a signed conversion.|
 |**+**| A sign (+ or -) should always be placed before a number produced with a signed conversion.  By default, only negative numbers have this sign.|
 
@@ -60,6 +64,7 @@ or
     printf("%.*d", precision, num);
 
 **The length modifiers**
+
 |Modifier| Description |
 |--|--|
 |**l**| An integer conversion to a **long int** or **unsigned long int** argument.  |
@@ -151,26 +156,35 @@ In order to test the _printf function, you will need to create a *main.c* file i
     int main(void)
     {
         int len1, len2;
-	    char *s = "Hello";
+        char *s = "Hello";
 
-		    /* The '\n' character is used for printing a new line */
+        /* The '\n' character is used for printing a new line */
 
-			    /* Custom printf Function */
-			        _printf("Text\n");
-				        /* Standard Library printf Function */
-					    printf("Text\n");
-						    _printf("Hello %s\n", World);
-						        printf("Hello %s\n", World);
-							    _printf("I like %ctags\n", '#');
-							        printf("I like %ctags\n", '#');
+        /* Custom printf Function */
+         _printf("Text\n");
+        /* Standard Library printf Function */
+         printf("Text\n");
+         _printf("Hello %s\n", World);
+         printf("Hello %s\n", World);
+         _printf("I like %ctags\n", '#');
+         printf("I like %ctags\n", '#');
 
-								        len1 = _printf("%s World\n", s);
-									    len2 = printf("%s World\n", s);
+         len1 = _printf("%s World\n", s);
+         len2 = printf("%s World\n", s);
 
-										    _printf("The length was [%d]\n", len1);
-										        printf("The length was [%d]\n", len2);
+         _printf("The length was [%d]\n", len1);
+         printf("The length was [%d]\n", len2);
 
-												    return (0);
+	 printf("Plus Sign Pos Number[%+d]\n", 54);
+	 printf("Plus Sign Neg Number[%+d]\n", -54);
+
+	 printf("Space Pos Number[% d]\n", 54);
+	 printf("Space Neg Number[% d]\n", -54);
+
+	 printf("Hash Hexadecimal[%#x]\n", 123);
+	 printf("Hash Octal[%#o]\n", 123);
+
+         return (0);
     }
 
 **Compilation:**
@@ -195,15 +209,42 @@ When you are done creating you *main.c* file  you will need to compile it. You c
 > **Output:**
 >
 > Text
+>
 > Text
+>
 > Hello World
+>
 > Hello World
+>
 > I like #tags
+>
 > I like #tags
+>
 > Hello World
+>
 > Hello World
+>
 > The length was [12]
+>
 > The length was [12]
+>
+>Plus Sign Pos Number[+54]
+>
+>Plus Sign Neg Number[+54]
+>
+>Space Pos Number[ 54]
+>
+>Space Pos Number[-54]
+>
+>Hash Hexadecimal[0x7B]
+>
+>Hash Octal[0173]
+
+
+## **Bugs**
+
+The field width and precision modifiers are still in development, so there may be flaws with their functions.
+The flags (-) and (0) are yet to be implemented.
 
 ## **Built with**
 

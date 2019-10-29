@@ -81,3 +81,35 @@ char *gen_R(const char *pattern, int len_p, va_list list, int *len)
 	app_flags(pattern, len_p, str, w, p);
 	return (str);
 }
+/**
+ * gen_per - Generates a percentage % symbol to a malloec string
+ * @pattern: Not used
+ * @len_p: Not used
+ * @list: Not used
+ * @len: Not used
+ *
+ * Generates a symbol %
+ * the pattern inserted by parameter.
+ * The pattern was already checked.
+ * The next argument in list corresponds to the argument to print
+ *
+ * Return: A pointer to the string
+ * NULL if could not allocate the memory for the operation
+ */
+char *gen_per(const char *pattern, int len_p, va_list list, int *len)
+{
+	char *str;
+
+	(void) pattern;
+	(void) len_p;
+	(void) list;
+	(void) len;
+
+	str = malloc(2);
+	if (str == 0)
+		return (0);
+
+	str[0] = '%';
+	str[1] = '\0';
+	return (str);
+}
