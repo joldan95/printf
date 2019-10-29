@@ -87,7 +87,7 @@ int check_specs(const char *s, int *p)
 	char *flags = " 0-+#123456789.lh";
 	int i = 0, j = 0, len_flags = _strlen(flags);
 
-	while (s[i] && (i == 0 || s[i] != '%'))
+	while (s[i])
 	{
 		j = 0;
 		while (specs[j])
