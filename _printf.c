@@ -47,7 +47,8 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (check_specs(format + i, &j_spec) == 1 && check_format(format + i, j_spec))
+			if (check_specs(format + i, &j_spec) == 1
+			    && check_format(format + i, j_spec))
 			{
 				str = generate_malloc(format + i, j_spec, list, &lenstr);
 				lenstr = format[i + j_spec - 1] == 'c' ? lenstr : _strlen(str);
@@ -59,7 +60,7 @@ int _printf(const char *format, ...)
 			}
 			if (check_specs(format + i, &j_spec) == -1)
 				return (free_buffer(buffer, i_buffer));
-			if (format[i + 1] == '%' || format[i + 1] == 'h' || format[i + 1] == 'l')
+			if (format[i + 1] == 'h' || format[i + 1] == 'l')
 				_memcpy(buffer, format + i, &i_buffer, &stock, 1), j_spec = 2;
 			else
 				_memcpy(buffer, format + i, &i_buffer, &stock, j_spec);
@@ -82,7 +83,7 @@ int _printf(const char *format, ...)
  */
 int check_specs(const char *s, int *p)
 {
-	char *specs = "csSdioxXburRp";
+	char *specs = "%csSdioxXburRp";
 	char *flags = " 0-+#123456789.lh";
 	int i = 0, j = 0, len_flags = _strlen(flags);
 

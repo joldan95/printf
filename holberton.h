@@ -61,7 +61,7 @@ char *gen_u(const char *, int, va_list, int *);
 char *gen_S(const char *, int, va_list, int *);
 char *gen_r(const char *, int, va_list, int *);
 char *gen_R(const char *, int, va_list, int *);
-
+char *gen_per(const char *, int, va_list, int *);
 /* Flags functions */
 unsigned int get_width(const char *pattern, int len_p, va_list list);
 unsigned int get_precision(const char *pattern, int len_p, va_list list);
