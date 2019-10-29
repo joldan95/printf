@@ -132,18 +132,17 @@ void _memcpy(char *buffer, const char *src, int *i_b, int *stock, int n)
 {
 	int i = 0;
 
-	if (*i_b + n > 1024)
-	{
-		*stock = *stock + *i_b;
-		write(1, buffer, *i_b);
-		*i_b = 0;
-	}
-
 	while (i < n)
 	{
 		*(buffer + *i_b) = *(src + i);
 		i++;
 		*i_b = *i_b + 1;
+		if (*i_b + n > 1024)
+		{
+			*stock = *stock + *i_b;
+			write(1, buffer, *i_b);
+			*i_b = 0;
+		}
 	}
 }
 
