@@ -51,5 +51,7 @@ flycheck_*.el
 # network security
 /network-security.data
 
+# Test file
+checkmain.c
 
 # End of https://www.gitignore.io/api/emacs
