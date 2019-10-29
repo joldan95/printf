@@ -92,7 +92,7 @@ int check_specs(const char *s, int *p)
 		j = 0;
 		while (specs[j])
 		{
-			if (s[i] == specs[j])
+			if (s[i] == specs[j] && i != 0)
 			{
 				*p = i + 1;
 				return (1);
