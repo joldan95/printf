@@ -1,9 +1,15 @@
-.TH _PRINTF 3 "PRINTF(3)" "Holberton School" "Linux Programmer's Manual"
+.TH _PRINTF 3 "October 2019" "Holberton School" "Linux Programmers Manual"
 .SH NAME
 _printf - formatted output conversion with number of bytes printed as return
 .SH SYNOPSIS
 
+Printf is a variadic function with one mandatory argument format and extra arguments that can be none at all or many.
+
+Its inclusion requires the header\ "holberton.h".
+
 .B #include \ "holberton.h"
+
+Its prototype goes as follows:
 
 .B int _printf(const char *format, ...);
 
@@ -23,19 +29,14 @@ If an output error is encountered, a negative value of -1 is returned.
 \fBFormat of the format string\fR
 
 The format string is a character string starting and ending with double quotes. The format string is composed of zero or more directives; ordinary characters (not %), 
-which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more sub-sequent arguments. Each conversion
-specification is introduced by character % and ends with a \fIconversion specifier\fR. In between there may be (in this order) zero or more \fIflags\fR, an optional
-\fIprecision\fR and an optional \fIlength modifier\fR.
+which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments. Each conversion
+specification is introduced by character % and ends with a \fIconversion specifier\fR. In between there may be (in this order) zero or more \fIflags\fR, an optional field width, an optional \fIprecision\fR modifier and an optional \fIlength modifier\fR.
 
 The arguments must correspond properly with the conversion specifier. By default 
 the arguments are used in the order given, where each '*' and each conversion specifier
 asks for the next argument (and it is an error if insufficiently arguments are given). Thus
 
-     printf("%*d", width, num);
-
-and
-
-     printf("%d", num);
+     printf("%d", argument);
 
 .TP
 \fBThe flag Characters\fR
@@ -54,8 +55,8 @@ the \fB0\fR flag is ignored. If a precision is given with a numeric conversion, 
 
 .IP \fB-\fR
 (Minus sign) The converted value is to be left adjusted on the field boundary, (Default is right 
-justification) and padded with blanks in the right if, rather than on the left with blanks 
-or zeros. This flag overrides \fB0\fR if both are give.
+justification) and padded with blanks in the right rather than on the left with blanks 
+or zeros. This flag overrides \fB0\fR if both are given.
 
 .IP\fB\ '\fR\ \fB\ '\fR
 (Blank Space) The argument is padded with a single blank space before a positive number 
@@ -76,15 +77,24 @@ spaces on the left if the flag \fB-\fR is not present, and on the right if it is
 A character \fB*\fR can be used instead of a decimal string. In this case, an argument passed to 
 the function will be taken as the width value.
 
+  printf("%5d", num);
+
+  or
+
   printf("%*d", width, num);
 
 
 .TP
 \fBThe precision\fR
 
-An optional precision in the form of a period (.) followed by an optional decimal digit
-string. A character \fB*\fR can be used instead of a decimal string. In this case, an argument passe\
-d to the function will be taken as the width value.
+An  optional  precision,  in  the  form  of a period ('.') followed by an optional decimal digit string.
+A negative precision is taken as if the precision were omitted. This gives the minimum number of digits to 
+appear for d, i, o, u, x, and X conversions,  or the  maximum  number of characters to be printed from a string for s and S conversions. A character
+* can be used instead of a  decimal string. In this case, an argument passed to the function will be taken as the precision value.
+
+  printf("%.3d", num);
+
+  or
 
   printf("%.*d", precision, num);
 
@@ -108,7 +118,7 @@ A character that specifies the type of conversion to be applied, as follows:
 
 .RS
 .IP \fBd,\ i\fR
-The argument \fIint\fR argument is converted to a signed decimal notation. If precision is present,
+The argument \fIint\fR is converted to a signed decimal notation. If precision is present,
 it gives the minimum number of digits that must appear; if the converted value requires
 fewer digits, then it is padded with zeros on the left. Default precision is 1.
 
@@ -122,10 +132,10 @@ must appear; if the converted value requires fewer digits, then it will be padde
 zeros. By default the precision is 1.
 
 .IP \fBc\fR
-An \fIint\fR argument is converted to an \fIunsigned char\fR and the resulting character is written. The representation of characters is based off the ASCII coding.
+The \fIint\fR argument is converted to an \fIunsigned char\fR and the resulting character is written. The representation of characters is based off the ASCII coding.
 
 .IP \fBs\fR
-A \fIchar *\fR received is expected to be a pointer to an array of characters.
+The argument received is expected to be a pointer type \fIchar *\fR to an array of characters.
 Characters from this array are printed up to (but not including) a null byte \ ('\\0'). 
 If precision is specified, then this will determine how many characters are taken into 
 account for printing.
@@ -143,20 +153,20 @@ The argument is converted to an \fIunsigned int\fR value and then operated to ge
 binary representation (base 2).
 
 .IP \fBS\fR
-A \fIchar *\fR received is expected to be a pointer to an array of characters.
+The argument received is expected to be a pointer type \fIchar *\fR to an array of characters.
 Characters from this array are printed up to (but not including) a null byte \ ('\\0'). 
-Non printable characters (0 < ASCII value < 32 or >= 127) are printed this way: \fB\x\fR, followed by the ASCII code value in hexadecimal (upper case - always 2 characters).
+Non printable characters (0 < ASCII value < 32 or >= 127) are printed this way: \fB\\\fR\fBx\fR, followed by the ASCII code value in hexadecimal (upper case - always 2 characters).
 
 Example:  _printf("%S\n", "Holberton\nSchool");
 
 Output: Holberton\x0ASchool.
 
 .IP \fBr\fR
-A \fI char *\fR received is expected to be a pointer of to an array of characters.
+The argument received is expected to be a pointer type \fIchar *\fR to an array of characters.
 Characters from this array are printed in reverse order up to (but not including) a null byte \ ('\\0').
 
 .IP \fBR\fR
-An \fIchar *\fR received is expected to be a pointer to an array of characters.
+The argument received is expected to be a pointer type \fIchar *\fR to an array of characters.
 Characters from this array are encoded to ROT13 and printed in order up to (but not including a null byte \ ('\\0').
 
 
@@ -238,5 +248,5 @@ Characters from this array are encoded to ROT13 and printed in order up to (but 
 
 \fBUnknown:\fR[%y]
 
-.SH AUTHOR
+.SH AUTHORS
 Luis Medina Alfonso, Jhoan Stiven Zamora Caicedo
