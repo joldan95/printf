@@ -5,6 +5,7 @@
  * @pattern: Pattern to follow to print the adress
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates an reverse string
  * the pattern inserted by parameter.
@@ -46,6 +47,7 @@ char *gen_r(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the adress
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates an Rot13 Encoded String
  * the pattern inserted by parameter.

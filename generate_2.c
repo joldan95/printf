@@ -5,6 +5,7 @@
  * @pattern: Pattern to follow to print the hexadecimal
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates a hexadecimal written to a string, following
  * the pattern inserted by parameter.
@@ -51,6 +52,7 @@ char *gen_x(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the hexadecimal
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates a hexadecimal written to a string, following
  * the pattern inserted by parameter.
@@ -97,6 +99,7 @@ char *gen_X(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the adress
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates a hexadecimal written to a string, following
  * the pattern inserted by parameter.
@@ -115,7 +118,6 @@ char *gen_p(const char *pattern, int len_p, va_list list, int *len)
 	(void) len;
 	w = get_width(pattern, len_p, list);
 	p =  va_arg(list, void *);
-
 	if (p == 0)
 	{
 		p = "(nil)";
@@ -127,7 +129,6 @@ char *gen_p(const char *pattern, int len_p, va_list list, int *len)
 		app_flags(pattern, len_p, str, w, 0);
 		return (str);
 	}
-
 	n = (unsigned long int)p;
 	if (n != 0)
 		str = malloc(w + blen(n, base) + 1 + 2);
@@ -155,6 +156,7 @@ char *gen_p(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the adress
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates an unsigned int written to a string, following
  * the pattern inserted by parameter.
@@ -190,6 +192,7 @@ char *gen_u(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the adress
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates an string with no special characters
  * the pattern inserted by parameter.

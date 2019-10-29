@@ -67,12 +67,12 @@ int check_format(const char *formspec, int j)
 {
 	int h, k, z, zeropass = 0, star1 = 1, star2 = 1;
 	checkstr flagcheck[] = {
-		{'c', "0+#lh."},
-		{'s', "0+#lh"}, {'S', " 0+#lh"},
-		{'d', "#"}, {'i', "#"},
-		{'u', " +#"}, {'b', " +#lh"},
-		{'o', " +"}, {'x', " +"}, {'X', " +"},
-		{'p', " 0+#lh."}, {'r', " 0+#lh"}, {'R', " 0+#lh"}
+		{'c', ""},
+		{'s', ""}, {'S', ""},
+		{'d', ""}, {'i', ""},
+		{'u', ""}, {'b', ""},
+		{'o', ""}, {'x', ""}, {'X', ""},
+		{'p', ""}, {'r', ""}, {'R', ""}
 	};
 	/* Check Specifier and if flag cannot go with it*/
 	for (h = 0; h < 13; h++)

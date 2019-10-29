@@ -5,6 +5,7 @@
  * @s: parameter to analize %+3.3d
  * @len_p: length of part analized %+5.4d (l = 6)
  * @list: list of variadic arguments
+ * @len: length
  *
  * Return: 1 if correct, 0 if incorrect
  */

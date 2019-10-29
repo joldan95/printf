@@ -40,7 +40,7 @@ char *hexS(int n);
 char *rot13(char *s);
 int check_format(const char *formspec, int j);
 int check_specs(const char *s, int *p);
-void _memcpy(char *dest,  const char *src, unsigned int n);
+void _memcpy(char *buffer, const char *src, int *i_b, int *stock, int n);
 void print_number_str(long int n, char *str);
 void print_number_str_u(unsigned long int n, char *str);
 int free_buffer(char *, int);

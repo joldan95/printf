@@ -4,6 +4,7 @@
  * @pattern: Pattern to follow to print the character
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates a character to a string, following
  * the pattern inserted by parameter.
@@ -16,11 +17,11 @@
 char *gen_c(const char *pattern, int len_p, va_list list, int *len)
 {
 	char *str;
-	char c;
+	unsigned char c;
 	int w;
 
 	w = get_width(pattern, len_p, list);
-	c = va_arg(list, int);
+	c = (unsigned char)va_arg(list, int);
 	/* Width + char */
 	str = malloc(sizeof(char) * (2 + w));
 
@@ -38,6 +39,7 @@ char *gen_c(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the string
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates a character to a string, following
  * the pattern inserted by parameter.
@@ -76,6 +78,7 @@ char *gen_s(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the integer
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates an integer wrote to a string, following
  * the pattern inserted by parameter.
@@ -112,6 +115,7 @@ char *gen_i(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the octal
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates an octal written to a string, following
  * the pattern inserted by parameter.
@@ -156,6 +160,7 @@ char *gen_o(const char *pattern, int len_p, va_list list, int *len)
  * @pattern: Pattern to follow to print the binary
  * @len_p: Length of the pattern
  * @list: list of arguments of the pattern
+ * @len: length
  *
  * Generates an binary written to a string, following
  * the pattern inserted by parameter.
