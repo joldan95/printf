@@ -80,6 +80,7 @@ int app_precision(char *buffer, int pr, int is_str)
 /**
  * check_flag - Checks if a flag exists in a pattern
  * @pattern: Pattern where to check the flag
+ * @len_p: Length of the pattern
  * @flag: Flag to be checked
  *
  * Return: 1 if the flag exists
