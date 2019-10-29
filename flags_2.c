@@ -29,6 +29,7 @@ void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
 	/* if (wi && wi > len_buff) */
 /* Applies width */
 
+	len_buff = app_hash(pattern, len_p, buffer);
 	/* Applies numeral */
 	/* Applies plus and space */
 	/* if (wi && wi > len_buff) */
@@ -73,4 +74,53 @@ int app_precision(char *buffer, int pr, int is_str)
 	}
 
 	return (val);
+}
+
+/**
+ * app_hash - Applies the hash flag to the buffer
+ * @pattern: Pattern to follow
+ * @len_p: Lenght of patter
+ * @buffer: Buffer where to made the changes
+ *
+ * Return: The final length of the buffer
+ */
+int app_hash(const char* pattern, int len_p, char *buffer)
+{
+	int i, len_buff = _strlen(buffer), start;
+	char cs = pattern[len_p - 1];
+
+	if ((cs == 'o' || cs == 'x' || cs == 'X') && check_flag(pattern, len_p, '#'))
+	{
+		start = (cs == 'o' ? 1 : 2);
+		for (i = len_buff + start; i >= 0; i--)
+		{
+			if (i == 0)
+				buffer[i] = '0';
+			else if (i == 1 && cs != 'o')
+				buffer[i] = cs;
+			else
+				buffer[i] = buffer[i - start];
+		}
+	}
+	return (_strlen(buffer));
+}
+
+/**
+ * check_flag - Checks if a flag exists in a pattern
+ * @pattern: Pattern where to check the flag
+ * @flag: Flag to be checked
+ *
+ * Return: 1 if the flag exists
+ * 0 otherwise
+ */
+int check_flag(const char *pattern, int len_p, char flag)
+{
+	int i;
+
+	for (i = 0; i < len_p; i++)
+	{
+		if (pattern[i] == flag)
+			return (1);
+	}
+	return (0);
 }

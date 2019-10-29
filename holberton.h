@@ -45,6 +45,7 @@ void print_number_str(long int n, char *str);
 void print_number_str_u(unsigned long int n, char *str);
 int free_buffer(char *, int);
 
+
 /* Generate strings functions */
 char *generate_malloc(const char *s, int len_p, va_list list, int *);
 char *gen_c(const char *, int, va_list, int *);
@@ -68,5 +69,6 @@ long int get_param(const char *pattern, int len_p, va_list list);
 unsigned long int get_param_u(const char *pattern, int len_p, va_list list);
 void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr);
 int app_precision(char *buffer, int pr, int is_str);
-
+int app_hash(const char *pattern, int len_p, char *buffer);
+int check_flag(const char *pattern, int len_p, char flag);
 #endif
