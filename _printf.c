@@ -47,7 +47,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (check_specs(format + i, &j_spec) && check_format(format + i, j_spec))
+			if (check_specs(format + i, &j_spec) == 1 && check_format(format + i, j_spec))
 			{
 				str = generate_malloc(format + i, j_spec, list, &lenstr);
 				lenstr = format[i + j_spec - 1] == 'c' ? lenstr : _strlen(str);
@@ -57,7 +57,7 @@ int _printf(const char *format, ...)
 				i += j_spec;
 				continue;
 			}
-			if (format[i + 1] == '\0')
+			if (check_specs(format + i, &j_spec) == -1)
 				return (free_buffer(buffer, i_buffer));
 			if (format[i + 1] == '%' || format[i + 1] == 'h' || format[i + 1] == 'l')
 				_memcpy(buffer, format + i, &i_buffer, &stock, 1), j_spec = 2;
@@ -76,7 +76,8 @@ int _printf(const char *format, ...)
  * check_specs - Check if a string has a conversion specifier
  * @s: String where to check the conversion specifier
  * @p: Pointer to the variable where the length to consider is saved
- * Return: 0 if does not find a conversion specifier
+ * Return: -1 if ends the string
+ * 0 if does not find a conversion specifier but does not end the format
  * 1 if find a conversition specifier
  */
 int check_specs(const char *s, int *p)
@@ -108,6 +109,8 @@ int check_specs(const char *s, int *p)
 			break;
 		i++;
 	}
+	if (!s[i])
+		return (-1);
 	*p = i;
 	return (0);
 }
