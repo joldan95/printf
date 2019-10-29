@@ -39,3 +39,43 @@ int app_hash(const char* pattern, int len_p, char *buffer)
 	}
 	return (_strlen(buffer));
 }
+
+/**
+ * app_plus_space - Applies the plus or space flag to the biffer
+ * @pattern: Pattern to follow
+ * @len_p: Length of the pattern
+ * @buffer: Buffer where to made the changes
+ *
+ * Return: The final length of the buffer
+ */
+int app_plus_space(const char* pattern, int len_p, char *buffer)
+{
+	int i, len_buff = _strlen(buffer), start, per;
+	char cs = pattern[len_p - 1];
+
+	if (cs == 'd' || cs == 'i')
+	{
+		per = len_buff - effective_length(buffer);
+		if (check_flag(pattern, len_p, '+'))
+		{
+			if (buffer[per] == '-')
+				return (len_buff);
+			if (per >= 1)
+				buffer[per - 1] = '+';
+			else
+				for (i = len_buff + 1; i >= 0; i--)
+					buffer[i] = (i == 0 ? '+' : buffer[i - 1]);
+		}
+		else if (check_flag(pattern, len_p, ' '))
+		{
+			if (buffer[per] == '-')
+				return (len_buff);
+			if (per >= 1)
+				buffer[per - 1] = ' ';
+			else
+				for (i = len_buff + 1; i >= 0; i--)
+					buffer[i] = (i == 0 ? ' ' : buffer[i - 1]);
+		}
+	}
+	return (_strlen(buffer));
+}
