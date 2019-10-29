@@ -1,3 +1,4 @@
+#include "holberton.h"
 /**
  * app_hash - Applies the hash flag to the buffer
  * @pattern: Pattern to follow
@@ -50,7 +51,7 @@ int app_hash(const char* pattern, int len_p, char *buffer)
  */
 int app_plus_space(const char* pattern, int len_p, char *buffer)
 {
-	int i, len_buff = _strlen(buffer), start, per;
+	int i, len_buff = _strlen(buffer), per;
 	char cs = pattern[len_p - 1];
 
 	if (cs == 'd' || cs == 'i')

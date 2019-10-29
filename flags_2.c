@@ -30,6 +30,7 @@ void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
 /* Applies width */
 
 	len_buff = app_hash(pattern, len_p, buffer);
+	len_buff = app_plus_space(pattern, len_p, buffer);
 	/* Applies numeral */
 	/* Applies plus and space */
 	/* if (wi && wi > len_buff) */
