@@ -44,7 +44,7 @@ void _memcpy(char *buffer, const char *src, int *i_b, int *stock, int n);
 void print_number_str(long int n, char *str);
 void print_number_str_u(unsigned long int n, char *str);
 int free_buffer(char *, int);
-
+int effective_length(char *buffer);
 
 /* Generate strings functions */
 char *generate_malloc(const char *s, int len_p, va_list list, int *);
