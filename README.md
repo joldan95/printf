@@ -111,7 +111,7 @@ Function for checking if format of the _printf arguments is correct
 
  Functions for text formatting flags
 
->  flags_1.c / flags_2.c
+>  flags_1.c / flags_2.c / flags_3.c
 
  Function that selects the correct expanding and conversion functions to call
 
@@ -175,28 +175,29 @@ In order to test the _printf function, you will need to create a *main.c* file i
          _printf("The length was [%d]\n", len1);
          printf("The length was [%d]\n", len2);
 
-	 printf("Plus Sign Pos Number[%+d]\n", 54);
-	 printf("Plus Sign Neg Number[%+d]\n", -54);
+	 _printf("Plus Sign Pos Number[%+d]\n", 54);
+	 _printf("Plus Sign Neg Number[%+d]\n", -54);
 
-	 printf("Space Pos Number[% d]\n", 54);
-	 printf("Space Neg Number[% d]\n", -54);
+	 _printf("Space Pos Number[% d]\n", 54);
+	 _printf("Space Neg Number[% d]\n", -54);
 
-	 printf("Hash Hexadecimal[%#x]\n", 123);
-	 printf("Hash Octal[%#o]\n", 123);
+	 _printf("Hash Hexadecimal[%#x]\n", 123);
+	 _printf("Hash Octal[%#o]\n", 123);
 
          return (0);
     }
 
 **Compilation:**
 
-When you are done creating you *main.c* file  you will need to compile it. You can use any compiler software you like, although this project was tested in GNU GCC with different error flags such as:
+When you are done creating you *main.c* file  you will need to compile it. You can use any compiler software you like, although this project was tested in GNU GCC 5.5.0 with different error flags such as:
 
 > **-Wall:** Enables all the warnings about constructions.
 >
 > **-Wextra :** Enables some extra warning flags that are not enabled by **-Wall**.
 >
 > **-Werror:** Make all warnings into hard errors.
-> -pedantic: Issue all the mandatory diagnostics listed in the C standard.
+>
+> **-pedantic:** Issue all the mandatory diagnostics listed in the C standard.
 >
 > **-Wno-format:** Disables warnings about printf format (so that you can try any type of format you want) in equivalence to a custom made variadic function.
 
