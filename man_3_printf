@@ -21,7 +21,7 @@ although it can print larger sets of data.
 .TP
 .BR Return
 
-Upon succesful return, this function returns the the number of characters printed (excluding the null byte used to end output to strings).
+Upon succesful execution, this function returns the the number of characters printed (excluding the null byte used to end output to strings).
 
 If an output error is encountered, a negative value of -1 is returned.
 
@@ -210,6 +210,17 @@ Characters from this array are encoded to ROT13 and printed in order up to (but 
     \fB_printf(\fR"Len:[\fB%d\fR]\n", len\fB)\fR;
     \fB_printf(\fR"Unknown:[\fB%y\fR]\n"\fB)\fR;
 
+
+
+    \fB_printf(\fR"Plus Sign Pos Number:[%+d]\n", 54\fB)\fR;
+    \fB_printf(\fR"Plus Sign Neg Number:[%+d]\n", -54\fB)\fR;
+
+    \fB_printf(\fR"Space Pos Number:[% d]\n", 54\fB)\fR;
+    \fB_printf(\fR"Space Neg Number:[% d]\n", -54\fB)\fR;
+
+    \fB_printf(\fR"# Hexadecimal:[%#x]\n", 123\fB)\fR;
+    \fB_printf(\fR"# Octal:[%#o]\n", 123\fB)\fR;
+
     return 0;
 
 }
@@ -247,6 +258,18 @@ Characters from this array are encoded to ROT13 and printed in order up to (but 
 \fBLen:\fR[12]
 
 \fBUnknown:\fR[%y]
+
+\fBPlus Sign Pos Number:\fR[+54]
+
+\fBPlus Sign Neg Number:\fR[-54]
+
+\fBSpace Pos Number:\fR[ 54]
+
+\fBSpace Neg Number:\fR[-54]
+
+\fB# Hexadecimal:\fR[0x7B]
+
+\fB# Octal:\fR[0173]
 
 .SH AUTHORS
 Luis Medina Alfonso, Jhoan Stiven Zamora Caicedo
