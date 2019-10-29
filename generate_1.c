@@ -16,11 +16,11 @@
 char *gen_c(const char *pattern, int len_p, va_list list, int *len)
 {
 	char *str;
-	char c;
+	unsigned char c;
 	int w;
 
 	w = get_width(pattern, len_p, list);
-	c = va_arg(list, int);
+	c = (unsigned char)va_arg(list, int);
 	/* Width + char */
 	str = malloc(sizeof(char) * (2 + w));
 
