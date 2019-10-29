@@ -7,7 +7,7 @@
  *
  * Return: The final length of the buffer
  */
-int app_hash(const char* pattern, int len_p, char *buffer)
+int app_hash(const char *pattern, int len_p, char *buffer)
 {
 	int i, len_buff = _strlen(buffer), start, per;
 	char cs = pattern[len_p - 1];
@@ -49,7 +49,7 @@ int app_hash(const char* pattern, int len_p, char *buffer)
  *
  * Return: The final length of the buffer
  */
-int app_plus_space(const char* pattern, int len_p, char *buffer)
+int app_plus_space(const char *pattern, int len_p, char *buffer)
 {
 	int i, len_buff = _strlen(buffer), per;
 	char cs = pattern[len_p - 1];
