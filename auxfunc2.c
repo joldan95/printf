@@ -60,3 +60,24 @@ char *rot13(char *s)
 	}
 	return (s);
 }
+
+/**
+ * effective_length - Computes the real length without spaces
+ * @buffer: Buffer to determine the real length
+ *
+ * Return: The effective length of the buffer
+ */
+int effective_length(char *buffer)
+{
+	int i, eff;
+
+	i = 0, eff = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] != ' ')
+			eff++;
+		i++;
+	}
+
+	return (eff);
+}
