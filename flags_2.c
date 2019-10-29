@@ -77,35 +77,6 @@ int app_precision(char *buffer, int pr, int is_str)
 }
 
 /**
- * app_hash - Applies the hash flag to the buffer
- * @pattern: Pattern to follow
- * @len_p: Lenght of patter
- * @buffer: Buffer where to made the changes
- *
- * Return: The final length of the buffer
- */
-int app_hash(const char* pattern, int len_p, char *buffer)
-{
-	int i, len_buff = _strlen(buffer), start;
-	char cs = pattern[len_p - 1];
-
-	if ((cs == 'o' || cs == 'x' || cs == 'X') && check_flag(pattern, len_p, '#'))
-	{
-		start = (cs == 'o' ? 1 : 2);
-		for (i = len_buff + start; i >= 0; i--)
-		{
-			if (i == 0)
-				buffer[i] = '0';
-			else if (i == 1 && cs != 'o')
-				buffer[i] = cs;
-			else
-				buffer[i] = buffer[i - start];
-		}
-	}
-	return (_strlen(buffer));
-}
-
-/**
  * check_flag - Checks if a flag exists in a pattern
  * @pattern: Pattern where to check the flag
  * @flag: Flag to be checked
