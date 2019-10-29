@@ -12,7 +12,7 @@ Upon successful execution, this function returns the number of characters printe
 
 If an output error is encountered, a negative value of -1 is returned.
 
-Its prototype of the function is the next:
+The prototype of this function is the next:
 
 > **int _printf(const char *format, ...);***
 
