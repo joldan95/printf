@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 			}
 			if (format[i + 1] == '\0')
 				return (free_buffer(buffer, i_buffer));
-			if (format[i + 1] == '%')
+			if (format[i + 1] == '%' || format[i + 1] == 'h' || format[i + 1] == 'l')
 				_memcpy(buffer, format + i, &i_buffer, &stock, 1), j_spec = 2;
 			else
 				_memcpy(buffer, format + i, &i_buffer, &stock, j_spec);
