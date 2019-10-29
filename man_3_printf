@@ -271,5 +271,10 @@ Characters from this array are encoded to ROT13 and printed in order up to (but 
 
 \fB# Octal:\fR[0173]
 
+
+.SH BUGS
+
+The field width and precision modifiers are still in development, so there may be flaws with their functions.
+
 .SH AUTHORS
 Luis Medina Alfonso, Jhoan Stiven Zamora Caicedo

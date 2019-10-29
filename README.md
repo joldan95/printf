@@ -181,8 +181,8 @@ In order to test the _printf function, you will need to create a *main.c* file i
 	 printf("Space Pos Number[% d]\n", 54);
 	 printf("Space Neg Number[% d]\n", -54);
 
-	 printf("# Hexadecimal[%#x]\n", 123);
-	 printf("# Octal[%#o]\n", 123);
+	 printf("Hash Hexadecimal[%#x]\n", 123);
+	 printf("Hash Octal[%#o]\n", 123);
 
          return (0);
     }
@@ -236,9 +236,14 @@ When you are done creating you *main.c* file  you will need to compile it. You c
 >
 >Space Pos Number[-54]
 >
-># Hexadecimal[0x7B]
+>Hash Hexadecimal[0x7B]
 >
-># Octal[0173]
+>Hash Octal[0173]
+
+
+## **Bugs**
+
+The field width and precision modifiers are still in development, so there may be flaws with their functions.
 
 ## **Built with**
 
