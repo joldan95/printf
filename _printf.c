@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 {
 	va_list list;
 	char *buffer, *str;
-	int  i = 0, i_buffer = 0, j_spec, lenstr;
+	int i = 0, i_buffer = 0, j_spec, lenstr, stock = 0;
 
 	buffer = malloc(1024);
 	if (buffer == NULL)
@@ -53,23 +53,23 @@ int _printf(const char *format, ...)
 				lenstr = format[i + j_spec - 1] == 'c' ? lenstr : _strlen(str);
 				if (str == NULL)
 					return (free_buffer(buffer, i_buffer));
-				_memcpy(buffer + i_buffer, str, lenstr), free(str);
-				i += j_spec, i_buffer += lenstr;
+				_memcpy(buffer, str, &i_buffer, &stock, lenstr), free(str);
+				i += j_spec;
 				continue;
 			}
 			if (format[i + 1] == '\0')
 				return (free_buffer(buffer, i_buffer));
 			if (format[i + 1] == '%')
-				_memcpy(buffer + i_buffer, format + i, 1), j_spec = 2, lenstr = 1;
+				_memcpy(buffer, format + i, &i_buffer, &stock, 1), j_spec = 2;
 			else
-				_memcpy(buffer + i_buffer, format + i, j_spec), lenstr = j_spec;
-			i += j_spec, i_buffer += lenstr;
+				_memcpy(buffer, format + i, &i_buffer, &stock, j_spec);
+			i += j_spec;
 			continue;
 		}
-		_memcpy(buffer + i_buffer, format + i, 1), i++, i_buffer++;
+		_memcpy(buffer, format + i, &i_buffer, &stock, 1), i++;
 	}
 	va_end(list), i_buffer = write(1, buffer, i_buffer), free(buffer);
-	return (i == 0 && !format ? -1 : i_buffer);
+	return (i == 0 && !format ? -1 : stock + i_buffer);
 }
 
 /**
@@ -114,24 +114,37 @@ int check_specs(const char *s, int *p)
 
 
 /**
- * _memcpy - copies the memory from src to dest
- * @dest: The destination pointer
+ * _memcpy - copies the memory from src to the buffer
+ * @buffer: The destination pointer
  * @src: The source pointer
+ * @i_b: Pointer to the index of the buffer
+ * @stock: Pointer to the actual stock of bytes written
  * @n: bytes to use from src
+ *
+ * Description: Copies the memory from src to the buffer inserted.
+ * the buffer has a limit of 1024. If the index of buffer is greater than
+ * 1024 after the copy, writes the content to the standard output, sum the
+ * bytes written and resets the index
  *
  * Return: Nothing(?)
  */
-void _memcpy(char *dest, const char *src, unsigned int n)
+void _memcpy(char *buffer, const char *src, int *i_b, int *stock, int n)
 {
-	unsigned int i = 0;
+	int i = 0;
+
+	if (*i_b + n > 1024)
+	{
+		*stock = *stock + *i_b;
+		write(1, buffer, *i_b);
+		*i_b = 0;
+	}
 
 	while (i < n)
 	{
-		*(dest + i) = *(src + i);
+		*(buffer + *i_b) = *(src + i);
 		i++;
+		*i_b = *i_b + 1;
 	}
-
-	/* return (dest); */
 }
 
 /**
