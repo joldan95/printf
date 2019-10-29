@@ -29,6 +29,8 @@ void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
 	/* if (wi && wi > len_buff) */
 /* Applies width */
 
+	len_buff = app_hash(pattern, len_p, buffer);
+	len_buff = app_plus_space(pattern, len_p, buffer);
 	/* Applies numeral */
 	/* Applies plus and space */
 	/* if (wi && wi > len_buff) */
@@ -73,4 +75,24 @@ int app_precision(char *buffer, int pr, int is_str)
 	}
 
 	return (val);
+}
+
+/**
+ * check_flag - Checks if a flag exists in a pattern
+ * @pattern: Pattern where to check the flag
+ * @flag: Flag to be checked
+ *
+ * Return: 1 if the flag exists
+ * 0 otherwise
+ */
+int check_flag(const char *pattern, int len_p, char flag)
+{
+	int i;
+
+	for (i = 0; i < len_p; i++)
+	{
+		if (pattern[i] == flag)
+			return (1);
+	}
+	return (0);
 }
