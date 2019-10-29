@@ -49,12 +49,12 @@ For \fBo\fR conversions the first character of the output string is made zero (b
 For \fBx\fR and \fBX\fR conversions, a nonzero result has the string "0x" or "0X" respectively added.
 
 .IP \fB0\fR
-The value should be zero padded. For \fBd\fR, \fBi\fR, \fBo\fR, \fBu\fR, \fBx\fR, and \fBX\fR 
+(Not implemented yet) The value should be zero padded. For \fBd\fR, \fBi\fR, \fBo\fR, \fBu\fR, \fBx\fR, and \fBX\fR 
 the converted value is padded on the left with zeros. If the \fB0\fR and \fB-\fR flags both appear, 
 the \fB0\fR flag is ignored. If a precision is given with a numeric conversion, the \fB0\fR flag is ignored.
 
 .IP \fB-\fR
-(Minus sign) The converted value is to be left adjusted on the field boundary, (Default is right 
+(Minus sign, not implemented yet) The converted value is to be left adjusted on the field boundary, (Default is right 
 justification) and padded with blanks in the right rather than on the left with blanks 
 or zeros. This flag overrides \fB0\fR if both are given.
 
@@ -274,7 +274,7 @@ Characters from this array are encoded to ROT13 and printed in order up to (but 
 
 .SH BUGS
 
-The field width and precision modifiers are still in development, so there may be flaws with their functions.
+The field width and precision modifiers are still in development, so there may be flaws with their functions. The flags (-) and (0) are yet to be implemented.
 
 .SH AUTHORS
 Luis Medina Alfonso, Jhoan Stiven Zamora Caicedo
