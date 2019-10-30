@@ -2,7 +2,7 @@
 
 This project consists of a custom made printf function for C language that allows different input arguments and options; its development was part of an intensive coding program in Holberton School Bogotá.
 
-![enter image description here](https://www.holbertonschool.com/holberton-logo.png)
+![Holberton School Logo](https://www.holbertonschool.com/holberton-logo.png)
 
 ## **Synopsis**
 
@@ -241,6 +241,19 @@ When you are done creating you *main.c* file  you will need to compile it. You c
 >
 >Hash Octal[0173]
 
+## **Flowchart**
+
+Here is a diagram of the general behaviour of the _printf.
+
+The most important functions are presented:
+
+_printf
+
+![_printf](https://i.imgur.com/nOO6dKj.png)
+
+Generate malloc
+
+![Generate Malloc](https://i.imgur.com/oqukAVN.png)
 
 ## **Bugs**
 
