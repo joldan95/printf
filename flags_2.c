@@ -16,16 +16,13 @@
  */
 void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
 {
-	char l = pattern[len_p - 1];
-	int is_str, len_buff = _strlen(buffer);
-
-	is_str = (l == 'r' || l == 'R' || l == 'S' || l == 's') ? 1 : 0;
+	int len_buff = _strlen(buffer);
 
 	(void) len_buff;
 	(void) wi;
 
-	if (pr)
-		len_buff = app_precision(buffer, pr, is_str);/* Applies precision */
+	/* Applies precision */
+	len_buff = app_precision(pattern, len_p, buffer, pr);
 	/* if (wi && wi > len_buff) */
 /* Applies width */
 
@@ -43,24 +40,32 @@ void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
  * app_precision - Applies the precision length to the buffer
  * @buffer: Buffer where to apply the precision length
  * @pr: Precision value to apply
- * @is_str: Value that determines if should work on a string or number buffer
+ * @cs: Conversion specicator
  *
  * Return: The final length of the buffer
  */
-int app_precision(char *buffer, int pr, int is_str)
+int app_precision(const char *pattern, int len_p, char *buffer, int pr)
 {
 	int i, j, stop, len_buff = _strlen(buffer), val;
+	char cs = pattern[len_p - 1];
 
 	/* If is string, the precision truncates the length of the string*/
-	if (is_str)
+	if (cs == 's')
 	{
 		if (pr < len_buff)
 			buffer[pr] = '\0', val = pr;
 		else
 			val = len_buff;
 	}
-	else
+	else if (cs == 'd' || cs == 'i' || cs == 'u' ||
+			 cs == 'o' || cs == 'x' || cs == 'X')
 	{
+		if (pr == 0 && check_flag(pattern, len_p, '.') && buffer[0] == '0'
+			&& len_buff == 1)
+		{
+			buffer[0] = '\0';
+			return (0);
+		}
 		if (pr > len_buff)
 		{
 			stop = buffer[0] == '-' ? 1 : 0;
