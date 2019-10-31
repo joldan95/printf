@@ -20,7 +20,6 @@ char *gen_r(const char *pattern, int len_p, va_list list, int *len)
 	char *str, *s;
 	int i, l = 0, w, p;
 
-	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	s = va_arg(list, char *);
@@ -39,7 +38,7 @@ char *gen_r(const char *pattern, int len_p, va_list list, int *len)
 
 	rev_str(str);
 
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, len, w, p);
 	return (str);
 }
 /**
@@ -62,7 +61,6 @@ char *gen_R(const char *pattern, int len_p, va_list list, int *len)
 	char *str, *s;
 	int i, l = 0, w, p;
 
-	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	s = va_arg(list, char *);
@@ -78,7 +76,7 @@ char *gen_R(const char *pattern, int len_p, va_list list, int *len)
 		str[i] = s[i];
 
 	rot13(str);
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, len, w, p);
 	return (str);
 }
 /**
