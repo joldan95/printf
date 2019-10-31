@@ -18,12 +18,12 @@
 void app_flags(const char *pattern, int len_p, char *buffer, int *len_b, int wi, int pr)
 {
 	(void) wi;
-
+	*len_b = pattern[len_p - 1] == 'c' ? *len_b : _strlen(buffer);
 	/* Applies precision */
 	if (pattern[len_p - 1] != 'c' && pattern[len_p - 1] != 'p')
 		*len_b = app_precision(pattern, len_p, buffer, pr);
 	/* Applies width */
-	if (wi && wi > len_b)
+	if (wi && wi > *len_b)
 		*len_b = app_width(buffer, *len_b, wi);
 	if (pattern[len_p - 1] != 'c')
 	{
@@ -33,7 +33,6 @@ void app_flags(const char *pattern, int len_p, char *buffer, int *len_b, int wi,
 		*len_b = app_plus_space(pattern, len_p, buffer);
 	}
 
-	/* if (wi && wi > len_buff) */
 /* Applies minus and 0 */
 	/* if (p > 0) */
 	/* {} */
