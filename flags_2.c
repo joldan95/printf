@@ -5,6 +5,7 @@
  * @pattern: Pattern that defines which flags should apply to the format
  * @len_p: Length of the pattern
  * @buffer: Buffer where to apply the flags
+ * @len_b: Length of the buffer
  * @wi: Value for width field
  * @pr: Value for precision field
  *
@@ -14,22 +15,24 @@
  *
  * Return: Nothing
  */
-void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
+void app_flags(const char *pattern, int len_p, char *buffer, int *len_b, int wi, int pr)
 {
-	int len_buff = _strlen(buffer);
-
-	(void) len_buff;
 	(void) wi;
 
 	/* Applies precision */
-	len_buff = app_precision(pattern, len_p, buffer, pr);
-	/* if (wi && wi > len_buff) */
-/* Applies width */
+	if (pattern[len_p - 1] != 'c' && pattern[len_p - 1] != 'p')
+		*len_b = app_precision(pattern, len_p, buffer, pr);
+	/* Applies width */
+	if (wi && wi > len_b)
+		*len_b = app_width(buffer, *len_b, wi);
+	if (pattern[len_p - 1] != 'c')
+	{
+		/* Applies hash */
+		*len_b = app_hash(pattern, len_p, buffer);
+		/* Applies plus and space */
+		*len_b = app_plus_space(pattern, len_p, buffer);
+	}
 
-	len_buff = app_hash(pattern, len_p, buffer);
-	len_buff = app_plus_space(pattern, len_p, buffer);
-	/* Applies numeral */
-	/* Applies plus and space */
 	/* if (wi && wi > len_buff) */
 /* Applies minus and 0 */
 	/* if (p > 0) */
@@ -37,10 +40,11 @@ void app_flags(const char *pattern, int len_p, char *buffer, int wi, int pr)
 }
 
 /**
- * app_precision - Applies the precision length to the buffer
+ * app_precision - Applies the precision field to the buffer
+ * @pattern: Pattern where defines the flags
+ * @len_p: Length of the pattern
  * @buffer: Buffer where to apply the precision length
  * @pr: Precision value to apply
- * @cs: Conversion specicator
  *
  * Return: The final length of the buffer
  */
@@ -80,6 +84,24 @@ int app_precision(const char *pattern, int len_p, char *buffer, int pr)
 	}
 
 	return (val);
+}
+
+/**
+ * app_width - Applies the width field to the buffer
+ * @buffer: Buffer to modify
+ * @len_b: Length of the buffer
+ * @wi: Width to apply
+ *
+ * Return: the final length of the string
+ */
+int app_width(char *buffer, int len_b, int wi)
+{
+	int i, mov = wi - len_b;
+
+	for (i = wi; i >= 0; i--)
+		buffer[i] = (i < mov ? ' ' : buffer[i - (mov)]);
+
+	return (wi);
 }
 
 /**
