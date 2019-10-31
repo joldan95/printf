@@ -84,7 +84,7 @@ int _printf(const char *format, ...)
 int check_specs(const char *s, int *p)
 {
 	char *specs = "%csSdioxXburRp";
-	char *flags = " 0-+#123456789.lh";
+	char *flags = " 0-+#123456789.lh*";
 	int i = 0, j = 0, len_flags = _strlen(flags);
 
 	while (s[i])
