@@ -67,8 +67,7 @@ unsigned int get_width(const char *pattern, int len_p, va_list list);
 unsigned int get_precision(const char *pattern, int len_p, va_list list);
 long int get_param(const char *pattern, int len_p, va_list list);
 unsigned long int get_param_u(const char *pattern, int len_p, va_list list);
-void app_flags(const char *pattern, int len_p, char *buffer,
-			   int len_b, int wi, int pr);
+void app_flags(const char *, int, char *, int *, int, int);
 int app_precision(const char *pattern, int len_p, char *buffer, int pr);
 int app_width(char *buffer, int len_b, int wi);
 int app_hash(const char *pattern, int len_p, char *buffer);
