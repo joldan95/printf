@@ -21,7 +21,6 @@ char *gen_x(const char *pattern, int len_p, va_list list, int *len)
 	unsigned long int i = 0, base = 16, n;
 	char *str;
 
-	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	n = get_param_u(pattern, len_p, list);
@@ -44,7 +43,7 @@ char *gen_x(const char *pattern, int len_p, va_list list, int *len)
 	str[i] = '\0';
 	rev_str(str);
 
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, len, w, p);
 	return (str);
 }
 /**
@@ -68,7 +67,6 @@ char *gen_X(const char *pattern, int len_p, va_list list, int *len)
 	unsigned long int i = 0, base = 16, n;
 	char *str;
 
-	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	n = get_param_u(pattern, len_p, list);
@@ -91,7 +89,7 @@ char *gen_X(const char *pattern, int len_p, va_list list, int *len)
 	str[i] = '\0';
 	rev_str(str);
 
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, len, w, p);
 	return (str);
 }
 /**
@@ -115,7 +113,6 @@ char *gen_p(const char *pattern, int len_p, va_list list, int *len)
 	unsigned long int i = 0, j, base = 16, n;
 	char *str, *p;
 
-	(void) len;
 	w = get_width(pattern, len_p, list);
 	p =  va_arg(list, void *);
 	if (p == 0)
@@ -126,7 +123,7 @@ char *gen_p(const char *pattern, int len_p, va_list list, int *len)
 			return (0);
 		for (j = 0; j <= 5; j++)
 			str[j] = p[j];
-		app_flags(pattern, len_p, str, w, 0);
+		app_flags(pattern, len_p, str, len, w, 0);
 		return (str);
 	}
 	n = (unsigned long int)p;
@@ -148,7 +145,7 @@ char *gen_p(const char *pattern, int len_p, va_list list, int *len)
 	str[i] = 'x', str[i + 1] = '0';
 	str[i + 2] = '\0';
 	rev_str(str);
-	app_flags(pattern, len_p, str, w, 0);
+	app_flags(pattern, len_p, str, len, w, 0);
 	return (str);
 }
 /**
@@ -172,7 +169,6 @@ char *gen_u(const char *pattern, int len_p, va_list list, int *len)
 	unsigned long int number, base = 10;
 	char *str;
 
-	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	number = get_param_u(pattern, len_p, list);
@@ -184,7 +180,7 @@ char *gen_u(const char *pattern, int len_p, va_list list, int *len)
 
 	print_number_str_u(number, str);
 
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, len, w, p);
 	return (str);
 }
 /**
@@ -212,7 +208,6 @@ char *gen_S(const char *pattern, int len_p, va_list list, int *len)
 	char *str, *s, *hx;
 	int i, j, l, count = 0;
 
-	(void) len;
 	w = get_width(pattern, len_p, list);
 	p = get_precision(pattern, len_p, list);
 	s = va_arg(list, char *);
@@ -246,6 +241,6 @@ char *gen_S(const char *pattern, int len_p, va_list list, int *len)
 	}
 	str[i] = '\0';
 
-	app_flags(pattern, len_p, str, w, p);
+	app_flags(pattern, len_p, str, len, w, p);
 	return (str);
 }
